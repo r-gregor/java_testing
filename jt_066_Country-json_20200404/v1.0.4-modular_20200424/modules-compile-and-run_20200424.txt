@@ -1,0 +1,249 @@
+# from:
+# file:///C:/Users/gregor.redelonghi/Dropbox/ODPRTO/_JAVA/jv_automatic-modules_20200414.txt
+# https://www.logicbig.com/tutorials/core-java-tutorial/modules/automatic-modules.html
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> tree
+.
+|-- com.rgregor.countries
+|   `-- com
+|       `-- rgregor
+|           `-- countries
+|               |-- Countries.java
+|               |-- CountriesCapitals.java
+|               |-- Country.java
+|               `-- country-capitals.json
+|-- lib
+|   `-- json-simple-1.1.jar
+`-- module-info.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> cat module-info.java
+module com.rgregor.countries {
+    requires json.simple;
+}
+
+# add at the top of all *.java:
+#    package com.rgregor.countries;
+# json-simple-1.1.jar becomes json.simple (automatic module)
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> javac --module-path lib -d out module-info.java com.rgregor.countries/com/rgregor/countries/*.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> tree
+.
+|-- com.rgregor.countries
+|   `-- com
+|       `-- rgregor
+|           `-- countries
+|               |-- Countries.java
+|               |-- CountriesCapitals.java
+|               |-- Country.java
+|               `-- country-capitals.json
+|-- lib
+|   `-- json-simple-1.1.jar
+|-- module-info.java
+`-- out
+    |-- com
+    |   `-- rgregor
+    |       `-- countries
+    |           |-- Countries.class
+    |           |-- CountriesCapitals.class
+    |           `-- Country.class
+    `-- module-info.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> java --module-path out\;lib --module com.rgregor.countries/com.rgregor.countries.CountriesCapitals germ slo
+Exception in thread "main" java.lang.NullPointerException
+        at java.base/java.io.Reader.<init>(Reader.java:167)
+        at java.base/java.io.InputStreamReader.<init>(InputStreamReader.java:97)
+        at com.rgregor.countries/com.rgregor.countries.CountriesCapitals.main(CountriesCapitals.java:54)
+
+# forget to copy country-capitals.json to out ...
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> cp com.rgregor.countries/com/rgregor/countries/country-capitals.json out/com/rgregor/countries/
+'com.rgregor.countries/com/rgregor/countries/country-capitals.json' -> 'out/com/rgregor/countries/country-capitals.json'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> java --module-path out\;lib --module com.rgregor.countries/com.rgregor.countries.CountriesCapitals germ slo
+------------------------------
+Country: Germany
+Capital: Berlin
+Country code: DE
+Continent: Europe
+------------------------------
+Country: Slovenia
+Capital: Ljubljana
+Country code: SI
+Continent: Europe
+------------------------------
+Country: Slovakia
+Capital: Bratislava
+Country code: SK
+Continent: Europe
+------------------------------
+
+# WORKS!!
+
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> jdeps --module-path lib\;out -s --module com.rgregor.countries
+com.rgregor.countries -> java.base
+com.rgregor.countries -> json.simple
+
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> jar --file lib/json-simple-1.1.jar --describe-module
+No module descriptor found. Derived automatic module.
+
+json.simple@1.1 automatic
+requires java.base mandated
+contains org.json.simple
+contains org.json.simple.parser
+
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> java --module-path out\;lib\json-simple-1.1.jar --describe-module com.rgregor.countries
+com.rgregor.countries file:///C:/Users/gregor.redelonghi/myprogs/cygwin64/home/gregor.redelonghi/majstaf/coding/JAVA_en/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src/out/
+requires json.simple
+requires java.base mandated
+contains com.rgregor.countries
+
+### creating modular jar!!!
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> tree
+.
+|-- com.rgregor.countries
+|   `-- com
+|       `-- rgregor
+|           `-- countries
+|               |-- Countries.java
+|               |-- CountriesCapitals.java
+|               |-- Country.java
+|               `-- country-capitals.json
+|-- lib
+|   `-- json-simple-1.1.jar
+|-- module-info.java
+`-- out
+    |-- com
+    |   `-- rgregor
+    |       `-- countries
+    |           |-- Countries.class
+    |           |-- CountriesCapitals.class
+    |           |-- Country.class
+    |           `-- country-capitals.json
+    `-- module-info.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> jar --create --file lib/CountriesCapitals.jar --main-class com.rgregor.countries.CountriesCapitals -C out/ .
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> tree
+.
+|-- com.rgregor.countries
+|   `-- com
+|       `-- rgregor
+|           `-- countries
+|               |-- Countries.java
+|               |-- CountriesCapitals.java
+|               |-- Country.java
+|               `-- country-capitals.json
+|-- lib
+|   |-- CountriesCapitals.jar
+|   `-- json-simple-1.1.jar
+|-- module-info.java
+`-- out
+    |-- com
+    |   `-- rgregor
+    |       `-- countries
+    |           |-- Countries.class
+    |           |-- CountriesCapitals.class
+    |           |-- Country.class
+    |           `-- country-capitals.json
+    `-- module-info.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> java -p lib/ -m com.rgregor.countries
+ +--------------------------------------------------------------------+
+ | Usage:                                                             |
+ | java -jar CountriesCapitals.jar [ country name part ] or  [ full ] |
+ |     country name ... displays countries with part in name          |
+ |     full         ... displays ALL countries (full list)            |
+ +--------------------------------------------------------------------+
+
+
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> java -p lib/ -m com.rgregor.countries slo gre
+------------------------------
+Country: Slovenia
+Capital: Ljubljana
+Country code: SI
+Continent: Europe
+------------------------------
+Country: Slovakia
+Capital: Bratislava
+Country code: SK
+Continent: Europe
+------------------------------
+Country: Grenada
+Capital: Saint George's
+Country code: GD
+Continent: North America
+------------------------------
+Country: Greece
+Capital: Athens
+Country code: GR
+Continent: Europe
+------------------------------
+Country: Saint Vincent and the Grenadines
+Capital: Kingstown
+Country code: VC
+Continent: Central America
+------------------------------
+Country: Greenland
+Capital: Nuuk
+Country code: GL
+Continent: Central America
+------------------------------
+
+
+### if jar was created WITHOUT --main-class then --module shuld contain module/package.mainClass:
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> java -p lib/ -m com.rgregor.countries slo gre
+module com.rgregor.countries does not have a ModuleMainClass attribute, use -m <module>/<main-class>
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn066_Country-json_20200404/v1.0.4-modular_20200424/src]
+$> java -p lib/ -m com.rgregor.countries/com.rgregor.countries.CountriesCapitals slo gre
+------------------------------
+Country: Slovenia
+Capital: Ljubljana
+Country code: SI
+Continent: Europe
+------------------------------
+Country: Slovakia
+Capital: Bratislava
+Country code: SK
+Continent: Europe
+------------------------------
+Country: Grenada
+Capital: Saint George's
+Country code: GD
+Continent: North America
+------------------------------
+Country: Greece
+Capital: Athens
+Country code: GR
+Continent: Europe
+------------------------------
+Country: Saint Vincent and the Grenadines
+Capital: Kingstown
+Country code: VC
+Continent: Central America
+------------------------------
+Country: Greenland
+Capital: Nuuk
+Country code: GL
+Continent: Central America
+------------------------------

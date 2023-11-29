@@ -1,0 +1,6 @@
+javac --module-path $PATH_TO_FX --add-modules=javafx.controls [filename].java 
+java --module-path $PATH_TO_FX --add-modules=javafx.controls [filename]
+
+# /usr/local/bin/jvfx_compile [filename].java
+# /usr/local/bin/jvfx_run [filename]
+

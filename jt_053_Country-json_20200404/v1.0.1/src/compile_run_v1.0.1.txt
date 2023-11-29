@@ -1,0 +1,8 @@
+# compile
+javac -cp lib/json-simple-1.1.jar:. CountriesCapitals.java
+
+# run
+java -cp lib/json-simple-1.1.jar:. CountriesCapitals
+
+
+

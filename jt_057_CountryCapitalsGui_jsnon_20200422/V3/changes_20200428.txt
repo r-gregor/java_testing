@@ -1,0 +1,8 @@
+added ComboBoxAutoComplete.java
+
+added:
+    // new for autocomplete
+    comboBox.setTooltip(new Tooltip());
+    new ComboBoxAutoComplete<String>(comboBox);
+to CountriesCapitalsGUI3.java
+

@@ -1,0 +1,2 @@
+jar -cvfe dirwalk_main_V2.jar Main_V2 *_V2.class
+

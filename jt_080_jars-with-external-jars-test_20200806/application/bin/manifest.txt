@@ -1,0 +1,2 @@
+Main-Class: org.rgregor.mainapp.Mainapp
+Class-Path: libs/App1.jar libs/App2.jar

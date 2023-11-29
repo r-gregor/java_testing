@@ -1,0 +1,3 @@
+java -cp .:Myfncs2.jar Test2
+java -cp Myfuncs:. Test
+

@@ -1,0 +1,3 @@
+Main-class: MoviesDatabase2
+Class-Path: lib/sqlite-jdbc-3.34.0.jar
+

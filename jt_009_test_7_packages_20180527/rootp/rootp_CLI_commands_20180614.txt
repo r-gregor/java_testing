@@ -1,0 +1,82 @@
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/test_7_packages_20180527/rootp]
+$> tree
+.
+├── leftp
+│   ├── Left.class
+│   ├── Left.java
+│   ├── Left2.class
+│   └── Left2.java
+├── rightp
+│   ├── Right.class
+│   ├── Right.java
+│   ├── Right2.class
+│   └── Right2.java
+├── Rootp.java
+└── rootp_CLI_commands_20180614.txt
+
+
+7 directories, 16 files
+
+##############################################################################################################
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/test_7_packages_20180527/rootp]
+$> javac rightp/Right.java
+$> javac rightp/Right2.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/test_7_packages_20180527/rootp]
+$> javac leftp/Left.java
+$> javac leftp/Left2.java
+
+##############################################################################################################
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/test_7_packages_20180527/rootp]
+$> java rightp.Right
+*****************************************
+* This is Right class in rightp package *
+*****************************************
+
+Instanstiating leftp.Left class:
+This is class Left from package leftp.
+
+Accessing my_self method from class Left in leftp package:
+This is method my_self from class Left in package leftp.
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/test_7_packages_20180527/rootp]
+$> java leftp.Left
+***************************************
+* This is Left class in leftp package *
+***************************************
+
+Instanstiating rightp.Right class:
+This is class Right from package rightp.
+
+Accessing my_self method from class Right in rightp package:
+This is method my_self from class Right in package rightp.
+
+##############################################################################################################
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/test_7_packages_20180527/rootp]
+$> java leftp.Left2
+****************************************
+* This is Left2 class in leftp package *
+****************************************
+
+Instanstiating rightp.Right2 class:
+This is class Right2 from package rightp.
+
+Accessing my_self method from class Right2 in rightp package:
+This is method my_self from class Right2 in package rightp.
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/test_7_packages_20180527/rootp]
+$> java rightp.Right2
+******************************************
+* This is Right2 class in rightp package *
+******************************************
+
+Instanstiating leftp.Left2 class:
+This is class Left2 from package leftp.
+
+Accessing my_self method from class Left2 in leftp package:
+This is method my_self from class Left2 in package leftp.
+
+...

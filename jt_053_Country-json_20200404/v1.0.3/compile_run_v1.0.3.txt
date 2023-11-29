@@ -1,0 +1,33 @@
+### LINUX ####################################################################################################
+# compile
+javac -cp lib/json-simple-1.1.jar:. CountriesCapitals.java
+
+# run
+java -cp lib/json-simple-1.1.jar:. CountriesCapitals
+
+# make jar
+jar -cvfm CountriesCapitals.jar manifest.txt lib/ *.class *.json
+
+$> cat manifest.txt 
+Manifest-Version: 1.0
+Main-class: CountriesCapitals
+Class-path: lib/json-simple-1.1.jar
+[newline !!]
+$> 
+
+### WIN (EN) #################################################################################################
+# compile
+javac -cp lib/json-simple-1.1.jar\;. CountriesCapitals.java
+
+# run
+java -cp lib/json-simple-1.1.jar\;. CountriesCapitals
+
+# make jar
+jar -cvfm CountriesCapitals.jar manifest.txt lib/ *.class *.json
+
+$> cat manifest.txt 
+Manifest-Version: 1.0
+Main-class: CountriesCapitals
+Class-path: lib/json-simple-1.1.jar
+[newline !!]
+$> 

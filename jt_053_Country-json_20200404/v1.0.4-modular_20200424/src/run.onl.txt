@@ -1,0 +1,1 @@
+java --module-path lib --module com.rgregor.countries/com.rgregor.countries.CountriesCapitals

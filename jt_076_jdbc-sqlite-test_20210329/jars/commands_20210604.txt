@@ -1,0 +1,15 @@
+$> cd OLDHDD/Dropbox/ODPRTO/MCDN_en/coding/JAVA_en/JAVA_en_testing/
+$> cd jn096_jdbc-sqlite-test_20210329/
+$> jarrun jars/MoviesDatabase3.jar
+$> cp MoviesDatabase3.java ~/majstaf/coding/JAVA_d/JAVA_d_testing/jd076_jdbc-sqlite-test_20210329/src/
+$> cd ~/majstaf/coding/JAVA_d/JAVA_d_testing/jd076_jdbc-sqlite-test_20210329/src/
+$> java -cp lib/sqlite-jdbc-3.34.0.jar:. MoviesDatabase3.java
+$> javac -d ../classes/ MoviesDatabase3.java
+$> cd ../jars
+$> cp Manifest{2,3}.txt
+$> vim Manifest3.txt
+$> cd ../classes/
+$> jar -cvfm ../jars/MoviesDatabase3.jar Manifest3.txt KRZMovies.db MoviesDatabase3.class
+$> cd ../jars/
+$> jarrun MoviesDatabase3.jar
+

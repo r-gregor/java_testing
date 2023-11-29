@@ -1,0 +1,2 @@
+Class-path: External2.jar
+Main-class: org.mainpackage.Main2

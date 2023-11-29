@@ -1,0 +1,37 @@
+$> rgregor@rgregor-hp [/home/rgregor/BRISI/java_app_name1/scr]
+$> tree
+.
+└── org
+    ├── mainpackage
+    │   ├── Main.class
+    │   └── Main.java
+    ├── packagename1
+    │   ├── App1.class
+    │   ├── App1.java
+    │   ├── App2.class
+    │   └── App2.java
+    └── packagename2
+        ├── App3.class
+        ├── App3.java
+        ├── App4.class
+        └── App4.java
+
+4 directories, 10 files
+
+$> rgregor@rgregor-hp [/home/rgregor/BRISI/java_app_name1/scr]
+$> jar -cfe app_name1.jar org/mainpackage/Main org/mainpackage/*.class org/packagename1/*.class org/packagename2/*.class
+
+$> rgregor@rgregor-hp [/home/rgregor/BRISI/java_app_name1/scr]
+$> ll
+total 8
+drwxrwxr-x 5 rgregor rgregor 4096 2019-04-07 20:41 org/
+-rw-rw-r-- 1 rgregor rgregor 2681 2019-04-07 21:25 app_name1.jar
+
+$> rgregor@rgregor-hp [/home/rgregor/BRISI/java_app_name1/scr]
+$> java -jar app_name1.jar 
+Message from org.packagename1.App1
+Message from org.packagename1.App2
+Message from org.packagename2.App3
+Message from org.packagename2.App4
+
+$> rgregor@rgregor-hp [/home/rgregor/BRISI/java_app_name1/scr]

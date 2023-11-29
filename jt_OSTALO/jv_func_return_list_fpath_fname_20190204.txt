@@ -1,0 +1,21 @@
+    /**
+     * returns a list of file absolute path (in Cygwin POSIX format) and filename, both as strings. The 
+     * filename full path is spllit on last "/". To construct full absolute path both strings must be
+     *concatenated with "/".
+     *
+     * @param   the filename (String)
+     * @return  the list (String[]) of absolute path and filename
+     */
+    public static String[] fname_parts(String fname) {
+        File file = new File(fname);
+        String fname_full_path = file.getAbsolutePath().replace("C:\\Users\\gregor.redelonghi\\myprogs\\cygwin64\\", "/").replace("\\", "/");
+        
+        // test
+        // System.out.println(fname_full_path);
+        
+        int sf_delim = fname_full_path.lastIndexOf("/");
+        String sf_fpath = fname_full_path.substring(0, sf_delim);
+        String sf_fname = fname_full_path.substring(sf_delim + 1);
+        String[] fparts = {sf_fpath, sf_fname};
+        return fparts;
+    }

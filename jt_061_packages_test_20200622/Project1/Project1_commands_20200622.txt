@@ -1,0 +1,44 @@
+[/home/rgregor/majfajls/0_BRISI/TTEESSTT] $> tree Project1/
+Project1/
+|-- bin
+|   `-- redelonghi
+|       `-- gregor
+|           |-- project1
+|           |   |-- Main.class
+|           |   `-- Test.class
+|           `-- project2
+|               `-- Info.class
+|-- jars
+|   `-- Main.jar
+`-- src
+    `-- redelonghi
+        `-- gregor
+            |-- project1
+            |   |-- Main.java
+            |   `-- Test.java
+            `-- project2
+                `-- Info.java
+
+
+
+cd ~/majfajls/0_BRISI/TTEESSTT/Project1/
+code .
+mkdir {src,bin}
+mv redelonghi/ src/
+cd src/
+javac -d ../bin/ redelonghi/gregor/project1/Main.java
+javac -d ../bin/ redelonghi/gregor/project2/Info.java
+java redelonghi.gregor.project1.Main
+java -cp bin/ redelonghi.gregor.project1.Main
+mkdir jars
+cd bin/
+jar --create --file ../jars/Main.jar --main-class redelonghi/gregor/project1/Main redelonghi/gregor/project1/*.class redelonghi/gregor/project2/*.class
+jarrun ../jars/Main.jar
+
+
+[/home/rgregor/majfajls/0_BRISI/TTEESSTT] $> jar -tvf Project1/jars/Main.jar
+     0 Mon Jun 22 22:54:44 CEST 2020 META-INF/
+   111 Mon Jun 22 22:54:44 CEST 2020 META-INF/MANIFEST.MF
+  1013 Mon Jun 22 22:48:48 CEST 2020 redelonghi/gregor/project1/Main.class
+  1113 Mon Jun 22 22:48:48 CEST 2020 redelonghi/gregor/project1/Test.class
+   493 Mon Jun 22 22:49:58 CEST 2020 redelonghi/gregor/project2/Info.class

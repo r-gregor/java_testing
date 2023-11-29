@@ -1,0 +1,449 @@
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806]
+$> mkdir external application
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806]
+$> ll
+total 0
+drwxr-xr-x+ 1 0 2020-08-06 09:42 application/
+drwxr-xr-x+ 1 0 2020-08-06 09:42 external/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806]
+$> cd external/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> mkdir -p com/example/app1
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> mkdir -p com/example/app2
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> tree
+.
+`-- com
+    `-- example
+        |-- app1
+        `-- app2
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> vscode .
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> tree
+.
+`-- com
+    `-- example
+        |-- app1
+        |   `-- App1.java
+        `-- app2
+            `-- App2.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> mkdir out1 out2
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> tree
+.
+|-- com
+|   `-- example
+|       |-- app1
+|       |   `-- App1.java
+|       `-- app2
+|           `-- App2.java
+|-- out1
+`-- out2
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> javac -d out1 com/example/app1/App1.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> tree
+.
+|-- com
+|   `-- example
+|       |-- app1
+|       |   `-- App1.java
+|       `-- app2
+|           `-- App2.java
+|-- out1
+|   `-- com
+|       `-- example
+|           `-- app1
+|               `-- App1.class
+`-- out2
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> javac -d out2 com/example/app2/App2.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> tree
+.
+|-- com
+|   `-- example
+|       |-- app1
+|       |   `-- App1.java
+|       `-- app2
+|           `-- App2.java
+|-- out1
+|   `-- com
+|       `-- example
+|           `-- app1
+|               `-- App1.class
+`-- out2
+    `-- com
+        `-- example
+            `-- app2
+                `-- App2.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> jar -cf App1.jar -C out1 com/example/app1/App1.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> tree
+.
+|-- App1.jar
+|-- com
+|   `-- example
+|       |-- app1
+|       |   `-- App1.java
+|       `-- app2
+|           `-- App2.java
+|-- out1
+|   `-- com
+|       `-- example
+|           `-- app1
+|               `-- App1.class
+`-- out2
+    `-- com
+        `-- example
+            `-- app2
+                `-- App2.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> jar -cf App2.jar -C out2 com/example/app2/App2.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/external]
+$> cd ..
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806]
+$> tree
+.
+|-- application
+`-- external
+    |-- App1.jar
+    |-- App2.jar
+    |-- com
+    |   `-- example
+    |       |-- app1
+    |       |   `-- App1.java
+    |       `-- app2
+    |           `-- App2.java
+    |-- out1
+    |   `-- com
+    |       `-- example
+    |           `-- app1
+    |               `-- App1.class
+    `-- out2
+        `-- com
+            `-- example
+                `-- app2
+                    `-- App2.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806]
+$> cd application/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application]
+$> mkdir src bin
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application]
+$> mkdir {src,bin}/libs
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application]
+$> tree
+.
+|-- bin
+|   `-- libs
+`-- src
+    `-- libs
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application]
+$> mkdir -p src/org/rgregor/mainapp
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application]
+$> tree
+.
+|-- bin
+|   `-- libs
+`-- src
+    |-- libs
+    `-- org
+        `-- rgregor
+            `-- mainapp
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application]
+$> cd src/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/src]
+$> vscode .
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/src]
+$> cp ../../external/App*.jar libs/
+'../../external/App1.jar' -> 'libs/App1.jar'
+'../../external/App2.jar' -> 'libs/App2.jar'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/src]
+$> tree ../application
+.
+|-- bin
+|   `-- libs
+`-- src
+    |-- libs
+    |   |-- App1.jar
+    |   `-- App2.jar
+    `-- org
+        `-- rgregor
+            `-- mainapp
+                `-- Mainapp.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/src]
+$> javac -d ../bin/ -cp libs/App1.jar:libs/App2.jar org/rgregor/mainapp/Mainapp.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/src]
+$> cd ..
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application]
+$> tree
+.
+|-- bin
+|   |-- libs
+|   `-- org
+|       `-- rgregor
+|           `-- mainapp
+|               `-- Mainapp.class
+`-- src
+    |-- libs
+    |   |-- App1.jar
+    |   `-- App2.jar
+    `-- org
+        `-- rgregor
+            `-- mainapp
+                `-- Mainapp.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application]
+$> cp -r src/libs/* bin/libs/
+'src/libs/App1.jar' -> 'bin/libs/App1.jar'
+'src/libs/App2.jar' -> 'bin/libs/App2.jar'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application]
+$> tree
+.
+|-- bin
+|   |-- libs
+|   |   |-- App1.jar
+|   |   `-- App2.jar
+|   `-- org
+|       `-- rgregor
+|           `-- mainapp
+|               `-- Mainapp.class
+`-- src
+    |-- libs
+    |   |-- App1.jar
+    |   `-- App2.jar
+    `-- org
+        `-- rgregor
+            `-- mainapp
+                `-- Mainapp.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application]
+$> cd bin/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/bin]
+$> java -cp libs/App1.jar:libs/App2.jar:. org.rgregor.mainapp.Mainapp
+App1 initialized ...
+This is App1
+Original 100,000000 --> double: 200,000000
+App2 initialized ...
+This is App2
+Original 10 --> squared: 100
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/bin]
+$> cat manifest.txt
+Main-Class: org.rgregor.mainapp.Mainapp
+Class-Path: libs/App1.jar libs/App2.jar
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/bin]
+$> jar --create --file MainApp.jar --manifest manifest.txt org/rgregor/mainapp/Mainapp.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/bin]
+$> ll
+total 5
+drwxr-xr-x+ 1    0 2020-08-06 10:19 libs/
+drwxr-xr-x+ 1    0 2020-08-06 10:19 org/
+-rwxr-xr-x  1 1163 2020-08-06 10:37 MainApp.jar*
+-rw-r--r--+ 1   82 2020-08-06 10:36 manifest.txt
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/bin]
+$> java -jar MainApp.jar
+App1 initialized ...
+This is App1
+Original 100,000000 --> double: 200,000000
+App2 initialized ...
+This is App2
+Original 10 --> squared: 100
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/bin]
+$> mkdir ../jars
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/bin]
+$> cp -r MainApp.jar libs/ ../jars/
+'MainApp.jar' -> '../jars/MainApp.jar'
+'libs/' -> '../jars/libs'
+'libs/App2.jar' -> '../jars/libs/App2.jar'
+'libs/App1.jar' -> '../jars/libs/App1.jar'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/bin]
+$> java -jar ../jars/MainApp.jar
+App1 initialized ...
+This is App1
+Original 100,000000 --> double: 200,000000
+App2 initialized ...
+This is App2
+Original 10 --> squared: 100
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806/application/bin]
+$> cd ../../
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806]
+$> tree
+.
+|-- application
+|   |-- bin
+|   |   |-- libs
+|   |   |   |-- App1.jar
+|   |   |   `-- App2.jar
+|   |   |-- MainApp.jar
+|   |   |-- manifest.txt
+|   |   `-- org
+|   |       `-- rgregor
+|   |           `-- mainapp
+|   |               `-- Mainapp.class
+|   |-- jars
+|   |   |-- libs
+|   |   |   |-- App1.jar
+|   |   |   `-- App2.jar
+|   |   `-- MainApp.jar
+|   `-- src
+|       |-- libs
+|       |   |-- App1.jar
+|       |   `-- App2.jar
+|       `-- org
+|           `-- rgregor
+|               `-- mainapp
+|                   `-- Mainapp.java
+|-- create-compile-run_20200806.txt
+`-- external
+    |-- App1.jar
+    |-- App2.jar
+    |-- com
+    |   `-- example
+    |       |-- app1
+    |       |   `-- App1.java
+    |       `-- app2
+    |           `-- App2.java
+    |-- out1
+    |   `-- com
+    |       `-- example
+    |           `-- app1
+    |               `-- App1.class
+    `-- out2
+        `-- com
+            `-- example
+                `-- app2
+                    `-- App2.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806]
+$> java -jar application/jars/MainApp.jar
+App1 initialized ...
+This is App1
+Original 100,000000 --> double: 200,000000
+App2 initialized ...
+This is App2
+Original 10 --> squared: 100
+
+# Or ...
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806]
+$> java -cp application/jars/MainApp.jar org.rgregor.mainapp.Mainapp
+App1 initialized ...
+This is App1
+Original 100,000000 --> double: 200,000000
+App2 initialized ...
+This is App2
+Original 10 --> squared: 100
+
+==============================================================================================================
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806]
+$> cat external/com/example/app1/App1.java
+package com.example.app1;
+
+public class App1 {
+
+    public App1() {
+        System.out.println("App1 initialized ...");
+    }
+
+    public void info() {
+        System.out.println("This is App1");
+    }
+
+    public double makeTwiceAsBig(double num) {
+        return num * 2;
+    }
+}
+==============================================================================================================
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806]
+$> cat external/com/example/app2/App2.java
+package com.example.app2;
+
+public class App2 {
+
+    public App2() {
+        System.out.println("App2 initialized ...");
+    }
+
+    public void info2() {
+        System.out.println("This is App2");
+    }
+
+    public int squareTheNumber(int num) {
+        return num * num;
+    }
+}
+==============================================================================================================
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200806]
+$> cat application/src/org/rgregor/mainapp/Mainapp.java
+package org.rgregor.mainapp;
+
+import com.example.app1.App1;
+import com.example.app2.App2;
+
+public class Mainapp {
+    public static void main(String[] args) {
+
+        //App1
+        App1 a1 = new App1();
+        a1.info();
+        double original = 100.0;
+        double dn = a1.makeTwiceAsBig(original);
+        System.out.printf("Original %f --> double: %f%n", original, dn);
+
+        //App2
+        App2 a2 = new App2();
+        a2.info2();
+        int starnum = 10;
+        int squared = a2.squareTheNumber(starnum);
+        System.out.printf("Original %d --> squared: %d%n", starnum, squared);
+
+    }
+
+}
+==============================================================================================================

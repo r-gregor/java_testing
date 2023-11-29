@@ -1,0 +1,44 @@
+$> rgregor@hp-probook4730s [/home/rgregor/JAVA_d_testing/jd057_CountryCapitalsGui_jsnon_20200422/V3/src]
+$> javac -d ../classes --module-path $PATH_TO_FX --add-modules=javafx.controls -cp lib/json-simple-1.1.jar:. *.java
+
+$> rgregor@hp-probook4730s [/home/rgregor/JAVA_d_testing/jd057_CountryCapitalsGui_jsnon_20200422/V3/src]
+$> cd ../classes/
+
+$> rgregor@hp-probook4730s [/home/rgregor/JAVA_d_testing/jd057_CountryCapitalsGui_jsnon_20200422/V3/classes]
+$> java --module-path $PATH_TO_FX --add-modules=javafx.controls -cp lib/json-simple-1.1.jar:. CountriesCapitalsGUI3
+# *** WORKS!! ***
+
+$> rgregor@hp-probook4730s [/home/rgregor/JAVA_d_testing/jd057_CountryCapitalsGui_jsnon_20200422/V3]
+$> cp ../V2/classes/manifest.txt classes/
+'../V2/classes/manifest.txt' -> 'classes/manifest.txt'
+
+$> rgregor@hp-probook4730s [/home/rgregor/JAVA_d_testing/jd057_CountryCapitalsGui_jsnon_20200422/V3/classes]
+$> jar -cvfm CountriesCapitalsGUI3-1.jar manifest.txt lib/ *.class *.json
+added manifest
+adding: lib/(in = 0) (out= 0)(stored 0%)
+adding: lib/json-simple-1.1.jar(in = 16046) (out= 13991)(deflated 12%)
+adding: ComboBoxAutoComplete.class(in = 4609) (out= 2117)(deflated 54%)
+adding: Countries3.class(in = 3062) (out= 1589)(deflated 48%)
+adding: CountriesCapitalsGUI3$1.class(in = 1767) (out= 822)(deflated 53%)
+adding: CountriesCapitalsGUI3.class(in = 4752) (out= 2330)(deflated 50%)
+adding: Country.class(in = 1020) (out= 477)(deflated 53%)
+adding: country-capitals.json(in = 40247) (out= 6860)(deflated 82%)
+
+$> rgregor@hp-probook4730s [/home/rgregor/JAVA_d_testing/jd057_CountryCapitalsGui_jsnon_20200422/V3/classes]
+$> cp CountriesCapitalsGUI3-1.jar ../jars/
+'CountriesCapitalsGUI3-1.jar' -> '../jars/CountriesCapitalsGUI3-1.jar'
+
+$> rgregor@hp-probook4730s [/home/rgregor/JAVA_d_testing/jd057_CountryCapitalsGui_jsnon_20200422/V3/classes]
+$> cd !$
+cd ../jars/
+
+$> rgregor@hp-probook4730s [/home/rgregor/JAVA_d_testing/jd057_CountryCapitalsGui_jsnon_20200422/V3/jars]
+$> ll
+total 36
+drwxrwxr-x 2 rgregor rgregor  4096 2020-04-28 21:26 lib/
+-rw-rw-r-- 1 rgregor rgregor 29621 2020-04-28 21:30 CountriesCapitalsGUI3-1.jar
+
+$> rgregor@hp-probook4730s [/home/rgregor/JAVA_d_testing/jd057_CountryCapitalsGui_jsnon_20200422/V3/jars]
+$> jarxrun CountriesCapitalsGUI3-1.jar
+# *** WORKS!! ***
+# ...

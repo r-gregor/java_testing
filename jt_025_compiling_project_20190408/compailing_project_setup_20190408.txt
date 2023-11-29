@@ -1,0 +1,94 @@
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing] 
+$> mkdir 20190408_compiling_project
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project] 
+$> mkdir {src,bin}
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project] 
+$> cd src/
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project/src] 
+$> mkdir package1
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project/src] 
+$> cd !$
+cd package1
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project/src/package1] 
+$> atom Data.java
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project/src/package1] 
+$> atom Main.java
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project/src/package1] 
+$> cd ..
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project/src] 
+$> tree
+.
+└── package1
+    ├── Data.java
+    └── Main.java
+
+1 directory, 2 files
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project/src] 
+$> cd ..
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project] 
+$> ll
+total 8
+drwxrwxr-x 2 rgregor rgregor 4096 2019-04-08 12:54 bin/
+drwxrwxr-x 3 rgregor rgregor 4096 2019-04-08 12:55 src/
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project] 
+$> cd src/
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project/src] 
+$> mkdir pkg2
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project/src] 
+$> cd !$
+cd pkg2
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project/src/pkg2] 
+$> atom Data2.java
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project/src/pkg2] 
+$> cd ..
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project/src] 
+$> ll
+total 8
+drwxrwxr-x 2 rgregor rgregor 4096 2019-04-08 12:59 package1/
+drwxrwxr-x 2 rgregor rgregor 4096 2019-04-08 13:04 pkg2/
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project/src] 
+$> cd ..
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project] 
+$> javac -cp src/ -d bin/ src/package1/Main.java 
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project] 
+$> tree
+.
+├── bin
+│   ├── package1
+│   │   ├── Data.class
+│   │   └── Main.class
+│   └── pkg2
+│       └── Data2.class
+└── src
+    ├── package1
+    │   ├── Data.java
+    │   └── Main.java
+    └── pkg2
+        └── Data2.java
+
+6 directories, 6 files
+
+$> rgregor@rgregor-hp [/home/rgregor/majfajls/coding/JAVA_d/JAVA_d_testing/20190408_compiling_project] 
+$> java -cp bin/ package1.Main 
+This is Data class in package1.
+This is Data2 class in pkg2.
+ 

@@ -1,0 +1,2 @@
+jar -cvfe RsortByEnddate.jar RsortByEnddate *.class
+

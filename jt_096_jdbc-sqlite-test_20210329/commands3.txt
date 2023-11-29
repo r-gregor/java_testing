@@ -1,0 +1,14 @@
+Modified MoviesDatabse2 --> MoviesDatabase3: sorted by year desc and title asc
+
+	// String qString1 = "select * from movies";
+	String qString2 = "SELECT * FROM movies ORDER BY year DESC, title ASC";
+	ResultSet rs = statement.executeQuery(qString2);
+
+
+commands:
+[project]/classes/$> jar --create --file ../jars/MoviesDatabase3.jar -m Manifest3.txt MoviesDatabase3.class KRZMovies.db
+
+[project]/classes/$> cat Manifest3.txt
+Main-class: MoviesDatabase3
+Class-Path: lib/sqlite-jdbc-3.34.0.jar
+

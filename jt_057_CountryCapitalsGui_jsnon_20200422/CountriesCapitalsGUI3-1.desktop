@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CountriesCapitalsGUI3-1
+Comment=CountriesCapitalsGUI3-1
+Exec=java -jar --module-path /usr/share/openjfx/lib --add-modules=javafx.controls /home/rgregor/java/jars/gui/CountriesCapitalsGUI/CountriesCapitalsGUI3-1.jar
+Icon=java
+Path=/home/rgregor/java/jars/gui/CountriesCapitalsGUI
+Terminal=false
+StartupNotify=true
+Name[en_US]=Countries Capitals GUI3-1

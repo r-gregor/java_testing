@@ -1,0 +1,1 @@
+jar --create --file=GetFmemInfoGUI.jar --main-class=Gui2 -v -C ../classes/ .

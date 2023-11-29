@@ -1,0 +1,50 @@
+$> rgregor@rgregor-hp [/home/rgregor/JAVA_d_testing/20190407_external_jars_test/java_app_name1]
+$> tree -d
+.
+├── classes
+│   └── org
+│       ├── mainpackage
+│       ├── packagename1
+│       └── packagename2
+├── external
+│   └── com
+│       └── somecompany
+├── jars
+└── src
+    └── org
+        ├── mainpackage
+        ├── packagename1
+        └── packagename2
+
+14 directories
+
+$> rgregor@rgregor-hp [/home/rgregor/JAVA_d_testing/20190407_external_jars_test/java_app_name1]
+$> javac -cp src/:external/External2.jar src/org/mainpackage/Main2.java
+
+$> rgregor@rgregor-hp [/home/rgregor/JAVA_d_testing/20190407_external_jars_test/java_app_name1/classes]
+$> jar -cfm app_name2.jar manifest.txt org/mainpackage/*.class org/packagename1/*.class org/packagename2/*.class
+
+$> rgregor@rgregor-hp [/home/rgregor/JAVA_d_testing/20190407_external_jars_test/java_app_name1/classes]
+$> cat manifest.txt
+Class-path: External2.jar
+Main-class: org.mainpackage.Main2
+
+$> rgregor@rgregor-hp [/home/rgregor/JAVA_d_testing/20190407_external_jars_test/java_app_name1/classes]
+$> tree
+.
+├── app_name1.jar
+├── app_name2.jar
+├── External2.jar
+├── manifest.txt
+└── org
+    ├── mainpackage
+    │   ├── Main2.class
+    │   └── Main.class
+    ├── packagename1
+    │   ├── App1.class
+    │   └── App2.class
+    └── packagename2
+        ├── App3.class
+        └── App4.class
+
+4 directories, 10 files

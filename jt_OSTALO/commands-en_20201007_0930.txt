@@ -1,0 +1,12 @@
+ls majstaf/coding/JAVA_en/JAVA_en_testing/ | grep '^jn' | cut -b 7- | sed 's/_.\{8\}$//' | sort | uniq > just-names-en_20201007.txt
+ls DRPBX_ODPRT/MCDN_d/JAVA_d/JAVA_d_testing/ | grep '^jd' | cut -b 7- | sed 's/_.\{8\}$//' | sort | uniq > just-names-d_20201007.txt
+diff -y --suppress-common-lines just-names-en_20201007.txt just-names-d_20201007.txt > diffs_JAVA-en_JAVA-d_20201007.txt
+
+cd JAVA_en_testing/
+    mv jn_OSTALO/ OSTALO_jn
+    mv jn_UNARRANGED/ UNARRANGED_jn
+    mv javaFX_tests/ java-project-dir-structure_20200818/ OSTALO_jn/
+    mv copy-dir-tree-without-files_20200330.onl.txt OSTALO_jn/
+    
+ls majstaf/coding/JAVA_en/JAVA_en_testing/ | grep '^jn' | cut -b 7- | sed 's/_.\{8\}$//' | sort | uniq > just-names-en_20201007.txt
+diff -y --suppress-common-lines just-names-en_20201007.txt just-names-d_20201007.txt > diffs_JAVA-en_JAVA-d_20201007.txt

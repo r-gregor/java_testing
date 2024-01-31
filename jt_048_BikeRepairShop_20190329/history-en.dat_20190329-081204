@@ -194,7 +194,7 @@
   194  2019-02-20 12:48:51 jupyter notebook
   195  2019-02-20 12:49:02 jupyter notebook --no-browser
   196  2019-02-20 12:49:46 history
-  197  2019-02-20 12:50:38 cd METSYS-en/
+  197  2019-02-20 12:50:38 cd metsys_en/
   198  2019-02-20 12:50:40 ll
   199  2019-02-20 12:51:07 np jupyter-notebook_install_20190220.txt
   200  2019-02-20 12:54:12 jupyter notebook --no-browser
@@ -2043,7 +2043,7 @@
  2043  2019-03-27 09:06:12 lss
  2044  2019-03-27 09:06:13 llc
  2045  2019-03-27 09:06:17 less trap_exit-bash-scripts-cleanly_20190312.txt 
- 2046  2019-03-27 09:06:41 mv trap_exit-bash-scripts-cleanly_20190312.txt METSYS-en/
+ 2046  2019-03-27 09:06:41 mv trap_exit-bash-scripts-cleanly_20190312.txt metsys_en/
  2047  2019-03-27 09:06:43 llc
  2048  2019-03-27 09:06:48 rm plot.log 
  2049  2019-03-27 09:06:49 llc

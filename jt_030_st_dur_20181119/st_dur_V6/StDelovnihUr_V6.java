@@ -1,29 +1,30 @@
-// 20181014:	V1;
-// 20181017:	V2:	Starting to add entities for Python version ...
-//					String[] teden, HashMap<String, Integer> dni_v_mescu, ArrayList<String> mesci
-//				...
-//
-// 20181018:	V3: String m --> m.toLowerCase() (class mesec, m = parameter to cionstructor)
-//					move String[] teden and HashMap<String, Integer> dni_v_mescu in class mesec
-// 
-// 20181018:	V4:	like final version only not yet user arguments supplied --> SIMULATION
-// 20181119:	V5: Corrected start day as input {1 ... 7} -1 for correct index number (0 ... 6)
-//					public void displayMesec(String mesec) {} --> public void displayMesec() {}
-//					... gets String mesec from this.mesec!
-// 20240131		V6: get user input
-//
+// 20181014:    V1;
+// 20181017:    V2: Starting to add entities for Python version ...
+//                  String[] teden, HashMap<String, Integer> dni_v_mescu, ArrayList<String> mesci
+// ---
+// 20181018:    V3: String m --> m.toLowerCase() (class mesec, m = parameter to cionstructor)
+//                  move String[] teden and HashMap<String, Integer> dni_v_mescu in class mesec
+// ---
+// 20181018:    V4: like final version only not yet user arguments supplied --> SIMULATION
+// 20181119:    V5: Corrected start day as input {1 ... 7} -1 for correct index number (0 ... 6)
+//                  public void displayMesec(String mesec) {} --> public void displayMesec() {}
+//                  ... gets String mesec from this.mesec!
+// ---
+// 20240131     V6: get user input,
+//                  add +1 day if leap year
+// ---
 
 import java.util.*;
 
 public class StDelovnihUr_V6 {
 	String myProgramName = this.getClass().getName();
+	int curryr = Tms.get_curryr(); // V6
 
 	private String getUsageString() {
 		String usage1;
 		String usage2;
 
 		// V6
-		// usage1 = "USAGE:\tprogramm-name [month name] [day in a week]";
 		usage1 = String.format("USAGE:\t%s [month name] [day in a week]", myProgramName);
 		usage2 = "\n "+
 		"\t- month name in SLO: januar, februar, marec, ..., December (any Case)\n" +
@@ -45,14 +46,8 @@ public class StDelovnihUr_V6 {
 	//MAIN -----------------------------------
 	public static void main(String[] args) {
 
-		// V6
-		// System.out.printf("%s -- Starting ...\n", Tms.tms());
 		StDelovnihUr_V6 obj = new StDelovnihUr_V6();
 		GetDateAsString dts = new GetDateAsString();
-		//
-		// V6
-		// String crdtm = "[ " + dts.getDateTimeAsString() + " ]";
-		String usage = obj.getUsageString();
 
 		// V6
 		String my_month = "";
@@ -60,18 +55,15 @@ public class StDelovnihUr_V6 {
 
 		// V6
 		if(args.length != 2) {
-			System.out.printf("%n%s", usage);
+			System.out.printf("%n%s", obj.getUsageString());
 			mesec m6 = new mesec("januar", 1);
 			m6.displayUreNaMesecAll();
-			// System.out.printf("Both arguments suplied: month (%s) and start day (%d):%n", my_month, my_startDay);
 			System.exit(0);
 		} else {
 			my_month = args[0];
 			my_startDay = Integer.valueOf(args[1]);
 		}
 		
-		// System.out.printf("%s --\n", Tms.tms());
-		System.out.printf("Both arguments suplied: month (%s) and start day (%d):%n", my_month, my_startDay);
 		mesec m6 = new mesec(my_month, my_startDay);
 		m6.displayUreNaMesecAll();
 		
@@ -130,6 +122,7 @@ class mesec {
 		this.zacetek = z - 1;
 	}
 	
+	/*
 	// parameterized constructor 2 -- month only
 	public mesec(String m) {
 		this.mesec = m.toLowerCase();
@@ -141,6 +134,7 @@ class mesec {
 		this.mesec = "Januar";
 		this.zacetek = 0;
 	}
+	*/
 	
 	// new methods -- V3
 	public void setZacetek(int sd){
@@ -149,7 +143,13 @@ class mesec {
 	
 		
 	public int getStDni() {
+		int curryr = Tms.get_curryr();
+		final boolean isLeapYear = ((curryr % 4 == 0) && (curryr % 100 != 0) || (curryr % 400 == 0));
 		int dni = this.getDniVMescu().get(this.mesec);
+
+		if (this.mesec.toLowerCase().equals("februar") && isLeapYear) {
+			dni += 1;
+		}
 		return dni;
 	}
 	
@@ -159,7 +159,8 @@ class mesec {
 		int k = 1;
 		int DD = 0;
 		int dni = getStDni();
-		while (k < dni) {
+		// while (k < dni) {
+		while (k <= dni) {                       // V6: <= --> correct num of days
 			if (start > teden.length - 1) {
 				start = 0;
 			}
@@ -175,27 +176,22 @@ class mesec {
 		return st_ur;
 	}
 
-	
-	public void displayUreNaMesecAll() {
+
 		/*
 		 * print month, days per month, start day of the week and number of work hours per month given the start day
 		 */
+	public void displayUreNaMesecAll() {
 		System.out.printf("Mesec: %s, Stevilo dni: %d, ", this.mesec, this.getStDni());
-		// print("Mesec: {}, Stevilo dni: {}".format(self.mesec, dni_v_mescu[self.mesec],), end = ", ");
-		
 		System.out.printf("Prvi dan: %s, Stevilo delovnih ur: %d%n%n", teden[this.zacetek], this.getUreNaMesec());
-		// print("Prvi dan: {}, Stevilo delovnih ur: {}".format(teden[self.zacetek], self.getUreNaMesec()));
 	}
 
-	public void displayUreNaMesec() {
+
 		/*
 		 * print start day of the week and number of work hours per month given the start day
 		 */
-		
+	public void displayUreNaMesec() {
 		System.out.printf("Prvi dan: %s, Stevilo delovnih ur: %d%n", teden[this.zacetek], this.getUreNaMesec());
-		// print("Prvi dan: {}, Stevilo delovnih ur: {}".format(teden[self.zacetek], self.getUreNaMesec()))
 	}
-		
 
 
 /* 	public void displayMesec(String mesec) {
@@ -240,9 +236,7 @@ class mesec {
 		ArrayList<String> mymesci = this.getMesci();
 		for (String item : mymesci) {
 			this.mesec = item;
-			// System.out.printf("Mesec: %s%n", item);
 			System.out.printf("Mesec: %s, dni na mesec: %d%n", item, this.getDniVMescu().get(item));
-			
 			
 			for (int dan = 1; dan < 8; dan ++) {
 					this.setZacetek(dan);
@@ -254,8 +248,5 @@ class mesec {
 
 	}
 
-	// #######################################################################################################
-
-	// new methods -- V3
-
 } // END class
+

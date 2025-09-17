@@ -6,7 +6,7 @@ public class RsortByEnddate {
 	/** RsortByEnddate */
 	public static void main(String[] argv) {
 		String mydir;
-				
+
 		if (argv.length == 1) {
 			mydir = argv[0];
 		} else {

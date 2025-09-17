@@ -49,7 +49,7 @@ class DirWalkRsort {
 				} else {
 					djtsAndFjls.get(dateKey).add(fname);
 				}
-			}		 
+			}
 		} // end for
 
 		if (djtsList.size() != 0) {
@@ -63,7 +63,7 @@ class DirWalkRsort {
 	} // end func
 
 	/** Display contents of map in format: "yyyy-mm-dd words_of_fname_yyyymmdd.txt"
-	 * 
+	 *
 	 */
 	public void printDjtsAndFjls() {
 		File curdir = this.mydir;

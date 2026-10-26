@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=GetFMemeInfo
+Comment=
+Exec=/usr/local/bin/jarxrun /home/rgregor/java/jars/gui/GetFmemInfoGUI3.jar
+Icon=java
+Path=/home/rgregor/java/jars/gui/
+Terminal=false
+StartupNotify=false

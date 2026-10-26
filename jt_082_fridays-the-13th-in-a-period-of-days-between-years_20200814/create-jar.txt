@@ -1,0 +1,4 @@
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn082_fridays-the-13th-in-a-period-of-days-between-years_20200814]
+$> jar --create --file jars/FridayThe13th.jar --main-class fridaysthe13th.FridaysThe13th -C classes/ .
+
+

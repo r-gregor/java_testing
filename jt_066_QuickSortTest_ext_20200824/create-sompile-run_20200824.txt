@@ -1,0 +1,40 @@
+# from [https://www.vogella.com/tutorials/JavaAlgorithmsQuicksort/article.html]
+
+[jn085_QuickSortTest_ext_20200824/] $> mkdir -p src/quicksort
+[jn085_QuickSortTest_ext_20200824/] $> touch src/quicksort/{Main.java,Quicksort.java,QuicksortTest.java}
+...
+... vscode ...
+...
+... download junit-4.13.jar
+        [https://github.com/junit-team/junit4/wiki/Download-and-Install] -- >
+        [https://search.maven.org/search?q=g:junit%20AND%20a:junit]
+... and copy it to src/ ...
+...
+[jn085_QuickSortTest_ext_20200824/] $> cd src/
+[jn085_QuickSortTest_ext_20200824/src/] $> javac -d ../out -cp junit-4.13.jar\;. quicksort/*.java
+[jn085_QuickSortTest_ext_20200824/src/] $> cd ../
+[jn085_QuickSortTest_ext_20200824/] $> cp src/junit-4.13.jar out/
+[jn085_QuickSortTest_ext_20200824/] $> java -cp out/junit-4.13.jar\;out quicksort/Main
+[jn085_QuickSortTest_ext_20200824/] $> nano manifest.txt
+[jn085_QuickSortTest_ext_20200824/] $> jar --create --file jars/QuickSorttest2.jar --manifest manifest.txt -C out/ .
+[jn085_QuickSortTest_ext_20200824/] $> cp src/junit-4.13.jar jars/
+[jn085_QuickSortTest_ext_20200824/] $> java -jar jars/QuickSorttest2.jar
+[jn085_QuickSortTest_ext_20200824/] $> tree
+.
+|-- create-sompile-run_20200824.txt
+|-- jars
+|   |-- junit-4.13.jar
+|   `-- QuickSorttest2.jar
+|-- manifest.txt
+|-- out
+|   |-- junit-4.13.jar
+|   `-- quicksort
+|       |-- Main.class
+|       |-- Quicksort.class
+|       `-- QuicksortTest.class
+`-- src
+    |-- junit-4.13.jar
+    `-- quicksort
+        |-- Main.java
+        |-- Quicksort.java
+        `-- QuicksortTest.java

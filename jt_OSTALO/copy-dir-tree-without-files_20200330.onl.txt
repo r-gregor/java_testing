@@ -1,0 +1,33 @@
+$> find -type d
+.
+./DEST1
+./gn100_map-of-structs_20200227
+./read_write_json_files_20200228
+./read_write_json_files_20200228/group-1
+./read_write_json_files_20200228/group-2
+./SRC1
+./staticPageTest
+./staticPageTest/static
+./staticPageTest/static/stylesheets
+./torek_20200310
+./ukazidiff
+./ukazidiff/zadomov
+
+
+$> find -type d -exec mkdir -p ~/RUT/LELE/{} \;
+
+
+$> tree ~/RUT/LELE/
+/home/gregor.redelonghi/RUT/LELE/
+|-- DEST1
+|-- gn100_map-of-structs_20200227
+|-- read_write_json_files_20200228
+|   |-- group-1
+|   `-- group-2
+|-- SRC1
+|-- staticPageTest
+|   `-- static
+|       `-- stylesheets
+|-- torek_20200310
+`-- ukazidiff
+    `-- zadomov

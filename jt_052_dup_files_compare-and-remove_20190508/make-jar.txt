@@ -1,0 +1,2 @@
+# 2019-05-09 12:06:59 jar -cvfe DirWalk.jar Main *.class
+jar -cvfe dirwalk_main.jar Main *.class

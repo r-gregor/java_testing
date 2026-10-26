@@ -1,0 +1,24 @@
+...
+}
+private void readTextFile( String filename )
+{
+    String path = "resources/" + filename;
+    InputStream is = getClass().getResourceAsStream( path );
+    InputStreamReader isr = new InputStreamReader( is, "UTF-8" );
+    BufferedReader br = new BufferedReader( isr );
+    String line = br.readLine();
+
+...
+
+
+
+Okay it works fine now. I just swapped the offending line...
+
+    InputStream is = getClass().getResourceAsStream( path );
+
+...for this line...
+
+    FileInputStream is = new FileInputStream( filePath );
+
+...and I can get to files outside the jar file and set the encoding fine. Phew.
+

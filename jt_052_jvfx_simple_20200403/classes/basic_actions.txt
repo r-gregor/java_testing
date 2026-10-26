@@ -1,0 +1,25 @@
+# projectdir tree:
+$> tree -d
+.
+|-- classes
+|   `-- resources
+`-- src
+    `-- resources
+
+# create file and edit it in vscode
+[classes] $> touch ../src/GenericHandlerEx.java
+
+# cd to java file dir
+[classes] $>cd ../src/
+
+# compile (local jxc to put .class files in classes/)
+[src] $> ../jxc GenericHandlerEx.java
+
+[src] $>cd ../classes/
+
+# run ...
+[classes] $>jxr GenericHandlerEx
+MOUSE_ENTERED
+MOUSE_MOVED
+MOUSE_ENTERED_TARGET
+...

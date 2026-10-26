@@ -1,0 +1,317 @@
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming]
+$> tree
+.
+|-- com
+|   `-- example
+|       `-- programming
+|           `-- ProgrammingQuotes.java
+`-- module-info.java
+
+# ------------------------------------------------------------------------------------------------------------
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming]
+$> javac -d out module-info.java com/example/programming/ProgrammingQuotes.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming]
+$> tree
+.
+|-- com
+|   `-- example
+|       `-- programming
+|           `-- ProgrammingQuotes.java
+|-- module-info.java
+`-- out
+    |-- com
+    |   `-- example
+    |       `-- programming
+    |           `-- ProgrammingQuotes.class
+    `-- module-info.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming]
+$> jar cvfe programming-quote.jar com/example/programming/ProgrammingQuotes -C out .
+added manifest
+added module-info: module-info.class
+adding: com/(in = 0) (out= 0)(stored 0%)
+adding: com/example/(in = 0) (out= 0)(stored 0%)
+adding: com/example/programming/(in = 0) (out= 0)(stored 0%)
+adding: com/example/programming/ProgrammingQuotes.class(in = 1278) (out= 813)(deflated 36%)
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming]
+$> ll
+total 5
+drwxr-xr-x+ 1    0 2020-04-17 08:41 com/
+drwxr-xr-x+ 1    0 2020-04-17 08:56 out/
+-rw-r--r--  1   37 2020-04-17 08:46 module-info.java
+-rwxr-xr-x  1 2009 2020-04-17 08:57 programming-quote.jar*
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming]
+$> tree
+.
+|-- com
+|   `-- example
+|       `-- programming
+|           `-- ProgrammingQuotes.java
+|-- module-info.java
+|-- out
+|   |-- com
+|   |   `-- example
+|   |       `-- programming
+|   |           `-- ProgrammingQuotes.class
+|   `-- module-info.class
+`-- programming-quote.jar
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming]
+$> java -jar programming-quote.jar
+"Good design adds value faster than it adds cost."
+- Thomas C. Gale
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming]
+$> java -jar programming-quote.jar
+"Don't worry if it doesn't work right. If everything did, you'd be out of a job."
+- Mosher's Law of Software Engineering
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming]
+$> java -jar programming-quote.jar
+"I don't care if it works on your machine! We are not shipping your machine!"
+- Vidiu Platon
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming]
+$> java -jar programming-quote.jar
+"Don't worry if it doesn't work right. If everything did, you'd be out of a job."
+- Mosher's Law of Software Engineering
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417]
+$> tree
+.
+`-- com.example.programming
+    |-- com
+    |   `-- example
+    |       `-- programming
+    |           `-- ProgrammingQuotes.java
+    |-- module-info.java
+    |-- out
+    |   |-- com
+    |   |   `-- example
+    |   |       `-- programming
+    |   |           `-- ProgrammingQuotes.class
+    |   `-- module-info.class
+    `-- programming-quote.jar
+
+    
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417]
+$> jar -tvf com.example.programming/programming-quote.jar
+     0 Fri Apr 17 08:57:50 CEST 2020 META-INF/
+   117 Fri Apr 17 08:57:50 CEST 2020 META-INF/MANIFEST.MF
+   296 Fri Apr 17 08:57:50 CEST 2020 module-info.class
+     0 Fri Apr 17 08:56:58 CEST 2020 com/
+     0 Fri Apr 17 08:56:58 CEST 2020 com/example/
+     0 Fri Apr 17 08:56:58 CEST 2020 com/example/programming/
+  1278 Fri Apr 17 08:56:58 CEST 2020 com/example/programming/ProgrammingQuotes.class
+
+  
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417]
+$> mkdir com.example.gui
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417]
+$> tree
+.
+|-- com.example.gui
+|-- com.example.programming
+|   |-- com
+|   |   `-- example
+|   |       `-- programming
+|   |           `-- ProgrammingQuotes.java
+|   |-- module-info.java
+|   |-- out
+|   |   |-- com
+|   |   |   `-- example
+|   |   |       `-- programming
+|   |   |           `-- ProgrammingQuotes.class
+|   |   `-- module-info.class
+|   `-- programming-quote.jar
+`-- commands_list.txt
+
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417]
+$> mkdir -p com.example.gui/com/example/gui
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417]
+$> tree
+.
+|-- com.example.gui
+|   `-- com
+|       `-- example
+|           `-- gui
+|-- com.example.programming
+|   |-- com
+|   |   `-- example
+|   |       `-- programming
+|   |           `-- ProgrammingQuotes.java
+|   |-- module-info.java
+|   |-- out
+|   |   |-- com
+|   |   |   `-- example
+|   |   |       `-- programming
+|   |   |           `-- ProgrammingQuotes.class
+|   |   `-- module-info.class
+|   `-- programming-quote.jar
+`-- commands_list.txt
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.gui]
+$> java --module-path $PATH_TO_FX\;out --add-modules=javafx.controls --module com.example.gui/com.example.gui.QuoteFxApp
+Exception in Application constructor
+Exception in thread "main" java.lang.reflect.InvocationTargetException
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at java.base/sun.launcher.LauncherHelper$FXHelper.main(LauncherHelper.java:1051)
+Caused by: java.lang.RuntimeException: Unable to construct Application instance: class com.example.gui.QuoteFxApp
+        at javafx.graphics/com.sun.javafx.application.LauncherImpl.launchApplication1(LauncherImpl.java:890)
+        at javafx.graphics/com.sun.javafx.application.LauncherImpl.lambda$launchApplication$2(LauncherImpl.java:195)
+        at java.base/java.lang.Thread.run(Thread.java:834)
+Caused by: java.lang.IllegalAccessException: class com.sun.javafx.application.LauncherImpl (in module javafx.graphics) cannot access class com.example.gui.QuoteFxApp (in module com.example.gui) because module com.example.gui does not export com.example.gui to module javafx.graphics
+        at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:361)
+        at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:591)
+        at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+        at javafx.graphics/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$8(LauncherImpl.java:802)
+        at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:455)
+        at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:428)
+        at java.base/java.security.AccessController.doPrivileged(Native Method)
+        at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:427)
+        at javafx.graphics/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:96)
+        at javafx.graphics/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+        at javafx.graphics/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:174)
+        ... 1 more
+        
+##############################################################################################################        
+### errors ...  because module com.example.gui does not export com.example.gui to module javafx.graphics ###
+### add [exports com.example.gui;] line to module-info.java, and then it works ...
+##############################################################################################################
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.gui]
+$> javac -d out --module-path $PATH_TO_FX --add-modules=javafx.controls module-info.java com/example/gui/QuoteFxApp.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.gui]
+$> java --module-path $PATH_TO_FX\;out --add-modules=javafx.controls --module com.example.gui/com.example.gui.QuoteFxApp
+    ### outputs a message window ...
+
+### create second project structure to combine all from before:
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417]
+$> tree -d
+.
+|-- com.example.gui
+|   |-- com
+|   |   `-- example
+|   |       `-- gui
+|   `-- out
+|       `-- com
+|           `-- example
+|               `-- gui
+|-- com.example.gui2
+|   `-- com
+|       `-- example
+|           `-- gui2
+|-- com.example.programming
+|   |-- com
+|   |   `-- example
+|   |       `-- programming
+|   `-- out
+|       `-- com
+|           `-- example
+|               `-- programming
+|-- com.example.programming2
+|   `-- com
+|       `-- example
+|           `-- programming2
+
+`-- lib
+
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming2]
+$> javac -d out2 module-info.java com/example/programming2/ProgrammingQuotes2.java
+module-info.java:1: warning: [module] module name component programming2 should avoid terminal digits
+module com.example.programming2 {
+                  ^
+1 warning (*)
+
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming2]
+$> jar cvfe programming-quote2.jar com/example/programming2/ProgrammingQuotes2 -C out2 .
+added manifest
+added module-info: module-info.class
+adding: com/(in = 0) (out= 0)(stored 0%)
+adding: com/example/(in = 0) (out= 0)(stored 0%)
+adding: com/example/programming2/(in = 0) (out= 0)(stored 0%)
+adding: com/example/programming2/ProgrammingQuotes2.class(in = 1281) (out= 815)(deflated 36%)
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming2]
+$> tree
+.
+|-- com
+|   `-- example
+|       `-- programming2
+|           `-- ProgrammingQuotes2.java
+|-- module-info.java
+|-- out2
+|   |-- com
+|   |   `-- example
+|   |       `-- programming2
+|   |           `-- ProgrammingQuotes2.class
+|   `-- module-info.class
+`-- programming-quote2.jar
+
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming2]
+$> java -jar programming-quote2.jar
+"To iterate is human, to recurse divine."
+- L. Peter Deutsch
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming2]
+$> java -jar programming-quote2.jar
+"Don't worry if it doesn't work right. If everything did, you'd be out of a job."
+- Mosher's Law of Software Engineering
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming2]
+$> cp programming-quote2.jar ../lib/
+'programming-quote2.jar' -> '../lib/programming-quote2.jar'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.programming2]
+$> java -jar ../lib/programming-quote2.jar
+"Good design adds value faster than it adds cost."
+- Thomas C. Gale
+
+### add [requires com.example2.programming2;] line to the module-info.java of the com.example.gui2 module.
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.gui2]
+$> javac -d out2 --module-path $PATH_TO_FX\;../lib --add-modules=javafx.controls module-info.java com/example/gui2/QuoteFxApp2.java
+module-info.java:1: warning: [module] module name component gui2 should avoid terminal digits
+module com.example.gui2 {
+                  ^
+1 warning (*)
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.gui2]
+$> tree
+.
+|-- com
+|   `-- example
+|       `-- gui2
+|           `-- QuoteFxApp2.java
+|-- module-info.java
+`-- out2
+    |-- com
+    |   `-- example
+    |       `-- gui2
+    |           `-- QuoteFxApp2.class
+    `-- module-info.class
+
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn068_jpms-01_20200417/com.example.gui2]
+$> java --module-path $PATH_TO_FX\;out2\;../lib --add-modules=javafx.controls --module com.example.gui2/com.example.gui2.QuoteFxApp2
+
+### WORKS!!
+
+(*) -- warnings: module name shopuld not end with a number -- prevents the version nubers in 
+
+
+

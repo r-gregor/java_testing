@@ -1,0 +1,378 @@
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505]
+$> mkdir -p RegFormProject/{src,classes,mods}
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505]
+$> tree
+.
+`-- RegFormProject
+    |-- classes
+    |-- mods
+    `-- src
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505]
+$> mkdir -p RegFormProject/src/reg.form/com/reg/form
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505]
+$> tree
+.
+`-- RegFormProject
+    |-- classes
+    |-- mods
+    `-- src
+        `-- reg.form
+            `-- com
+                `-- reg
+                    `-- form
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505]
+$> cp ../jn069_jvfx_registration-form_20200420/from-net/src/RegistrationFormApplication.java RegFormProject/src/reg.form/com/reg/form/
+'../jn069_jvfx_registration-form_20200420/from-net/src/RegistrationFormApplication.java' -> 'RegFormProject/src/reg.form/com/reg/form/RegistrationFormApplication.java'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505]
+$> tree
+.
+`-- RegFormProject
+    |-- classes
+    |-- mods
+    `-- src
+        `-- reg.form
+            `-- com
+                `-- reg
+                    `-- form
+                        `-- RegistrationFormApplication.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505]
+$> touch RegFormProject/src/reg.form/module-info.java
+        module reg.form {
+            requires javafx.controls;
+            exports com.reg.form;
+        }
+        
+        # add package com.reg.form to beginning of RegistrationFormApplication.java !!
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505]
+$> cd RegFormProject/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> tree
+.
+|-- classes
+|-- mods
+`-- src
+    `-- reg.form
+        |-- com
+        |   `-- reg
+        |       `-- form
+        |           `-- RegistrationFormApplication.java
+        `-- module-info.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> javac -d classes/reg.form --module-path $PATH_TO_FX src/reg.form/module-info.java src/reg.form/com/reg/form/RegistrationFormApplication.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> tree
+.
+|-- classes
+|   `-- reg.form
+|       |-- com
+|       |   `-- reg
+|       |       `-- form
+|       |           |-- RegistrationFormApplication$1.class
+|       |           `-- RegistrationFormApplication.class
+|       `-- module-info.class
+|-- mods
+`-- src
+    `-- reg.form
+        |-- com
+        |   `-- reg
+        |       `-- form
+        |           `-- RegistrationFormApplication.java
+        `-- module-info.java
+
+        
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> java --module-path $PATH_TO_FX\;classes -m reg.form/com.reg.form.RegistrationFormApplication
+### WORKS! ###
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> mkdir mlib
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> tree
+.
+|-- classes
+|   `-- reg.form
+|       |-- com
+|       |   `-- reg
+|       |       `-- form
+|       |           |-- RegistrationFormApplication$1.class
+|       |           `-- RegistrationFormApplication.class
+|       `-- module-info.class
+|-- mlib
+|-- mods
+`-- src
+    `-- reg.form
+        |-- com
+        |   `-- reg
+        |       `-- form
+        |           `-- RegistrationFormApplication.java
+        `-- module-info.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject/classes]
+$> jar --create --file=reg-form.jar --main-class=com.reg.form.RegistrationFormApplication -C reg.form .
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject/classes]
+$> tree
+.
+|-- reg.form
+|   |-- com
+|   |   `-- reg
+|   |       `-- form
+|   |           |-- RegistrationFormApplication$1.class
+|   |           `-- RegistrationFormApplication.class
+|   `-- module-info.class
+`-- reg-form.jar
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject/classes]
+$> jarxrun reg-form.jar
+### WORKS! ###
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject/classes]
+$> jar -tvf reg-form.jar
+     0 Tue May 05 10:05:46 CEST 2020 META-INF/
+   116 Tue May 05 10:05:46 CEST 2020 META-INF/MANIFEST.MF
+   302 Tue May 05 10:05:46 CEST 2020 module-info.class
+     0 Tue May 05 09:36:00 CEST 2020 com/
+     0 Tue May 05 09:36:00 CEST 2020 com/reg/
+     0 Tue May 05 09:36:00 CEST 2020 com/reg/form/
+  2678 Tue May 05 09:36:00 CEST 2020 com/reg/form/RegistrationFormApplication$1.class
+  4102 Tue May 05 09:36:00 CEST 2020 com/reg/form/RegistrationFormApplication.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject/classes]
+$> ll
+total 8
+drwxr-xr-x+ 1    0 2020-05-05 09:36 reg.form/
+-rwxr-xr-x  1 4578 2020-05-05 10:05 reg-form.jar*
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject/classes]
+$> tree
+.
+|-- reg.form
+|   |-- com
+|   |   `-- reg
+|   |       `-- form
+|   |           |-- RegistrationFormApplication$1.class
+|   |           `-- RegistrationFormApplication.class
+|   `-- module-info.class
+`-- reg-form.jar
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject/classes]
+$> cd ..
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> cp classes/reg-form.jar mlib/
+'classes/reg-form.jar' -> 'mlib/reg-form.jar'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> tree
+.
+|-- classes
+|   |-- reg.form
+|   |   |-- com
+|   |   |   `-- reg
+|   |   |       `-- form
+|   |   |           |-- RegistrationFormApplication$1.class
+|   |   |           `-- RegistrationFormApplication.class
+|   |   `-- module-info.class
+|   `-- reg-form.jar
+|-- mlib
+|   `-- reg-form.jar
+|-- mods
+`-- src
+    `-- reg.form
+        |-- com
+        |   `-- reg
+        |       `-- form
+        |           `-- RegistrationFormApplication.java
+        `-- module-info.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> jarxrun mlib/reg-form.jar
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> java -jar --module-path $PATH_TO_FX --add-modules=javafx.controls mlib/reg-form.jar
+### WORKS! ###
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> jmod create --class-path mlib/reg-form.jar --main-class com.reg.form.RegistrationFormApplication mods/reg-form.jmod
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> tree
+.
+|-- classes
+|   |-- reg.form
+|   |   |-- com
+|   |   |   `-- reg
+|   |   |       `-- form
+|   |   |           |-- RegistrationFormApplication$1.class
+|   |   |           `-- RegistrationFormApplication.class
+|   |   `-- module-info.class
+|   `-- reg-form.jar
+|-- mlib
+|   `-- reg-form.jar
+|-- mods
+|   `-- reg-form.jmod
+`-- src
+    `-- reg.form
+        |-- com
+        |   `-- reg
+        |       `-- form
+        |           `-- RegistrationFormApplication.java
+        `-- module-info.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> mkdir image
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> tree
+.
+|-- classes
+|   |-- reg.form
+|   |   |-- com
+|   |   |   `-- reg
+|   |   |       `-- form
+|   |   |           |-- RegistrationFormApplication$1.class
+|   |   |           `-- RegistrationFormApplication.class
+|   |   `-- module-info.class
+|   `-- reg-form.jar
+|-- image
+|-- mlib
+|   `-- reg-form.jar
+|-- mods
+|   `-- reg-form.jmod
+`-- src
+    `-- reg.form
+        |-- com
+        |   `-- reg
+        |       `-- form
+        |           `-- RegistrationFormApplication.java
+        `-- module-info.java
+        
+#################################################################
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> export JAVAFX_JMODS="C:\Users\gregor.redelonghi\myprogs\openjfx-11.0.2_windows-x64_bin-jmods\javafx-jmods-11.0.2"
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> echo $JAVAFX_JMODS
+C:\Users\gregor.redelonghi\myprogs\openjfx-11.0.2_windows-x64_bin-jmods\javafx-jmods-11.0.2
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> jlink --output image/ --module-path mods\;$JAVAFX_JMODS --add-modules reg.form --launcher reg-form-run=reg.form
+Error: directory already exists: image
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> jlink --output image2 --module-path mods\;$JAVAFX_JMODS --add-modules reg.form --launcher reg-form-run=reg.form
+
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> tree -d
+.
+|-- classes
+|   `-- reg.form
+|       `-- com
+|           `-- reg
+|               `-- form
+|-- image
+|   |-- bin
+|   |   `-- server
+|   |-- conf
+|   |   `-- security
+|   |       `-- policy
+|   |           |-- limited
+|   |           `-- unlimited
+|   |-- include
+|   |   `-- win32
+|   |-- legal
+|   |   |-- java.base
+|   |   |-- java.datatransfer
+|   |   |-- java.desktop
+|   |   |-- java.prefs
+|   |   |-- java.xml
+|   |   `-- jdk.unsupported
+|   `-- lib
+|       |-- security
+|       `-- server
+|-- image2
+|   |-- bin
+|   |   `-- server
+|   |-- conf
+|   |   `-- security
+|   |       `-- policy
+|   |           |-- limited
+|   |           `-- unlimited
+|   |-- include
+|   |   `-- win32
+|   |-- legal
+|   |   |-- java.base
+|   |   |-- java.datatransfer
+|   |   |-- java.desktop
+|   |   |-- java.prefs
+|   |   |-- java.xml
+|   |   |-- javafx.base
+|   |   |-- javafx.controls
+|   |   |-- javafx.graphics
+|   |   `-- jdk.unsupported
+|   `-- lib
+|       |-- security
+|       `-- server
+|-- mlib
+|-- mods
+`-- src
+    `-- reg.form
+        `-- com
+            `-- reg
+                `-- form
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> ./image2/bin/reg-form-run
+### WORKS!!! ###
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> cat ./image/bin/reg-form-run
+#!/bin/sh
+JLINK_VM_OPTIONS=
+DIR=`dirname $0`
+$DIR/java $JLINK_VM_OPTIONS -m reg.form/com.reg.form.RegistrationFormApplication $@
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> cat ./image/bin/reg-form-run.bat
+@echo off
+set JLINK_VM_OPTIONS=
+set DIR=%~dp0
+"%DIR%\java" %JLINK_VM_OPTIONS% -m reg.form/com.reg.form.RegistrationFormApplication %*
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> jlink --no-header-files --no-man-pages --compress=2 --strip-debug --output image3 --module-path mods\;$JAVAFX_JMODS --add-modules reg.form --launcher reg-form-run3=reg.form
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> ./image3/bin/reg-form-run3
+### WORKS!!! ###
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> du -sh image2 image3
+88M     image2
+46M     image3
+### HALF!! ###
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> rm -r image2
+rm: remove 1 argument recursively? y
+...
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> mv image3/ RegFormApp
+'image3/' -> 'RegFormApp'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn073_jvfx_registration-form-modules_20200505/RegFormProject]
+$> ./RegFormApp/bin/reg-form-run3
+### GUES WHAT ... ###

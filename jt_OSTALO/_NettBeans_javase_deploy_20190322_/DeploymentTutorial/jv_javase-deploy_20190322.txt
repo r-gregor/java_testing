@@ -1,0 +1,393 @@
+filename: jv_javase-deploy_20190322.txt
+https://netbeans.org/kb/articles/javase-deploy.html
+
+Packaging and Deploying Desktop Java Applications
+
+   One question that a lot of beginning programmers have is: "Now that I've created my application in
+   the IDE, how do I get it to work from the command line outside of the IDE." Similarly, someone might
+   ask, "How do I distribute this application to other users without having to give them the whole IDE
+   as well?"
+
+   The answers to these questions are relatively simple, but not necessarily obvious. This document
+   addresses those questions by taking you through the basics of using NetBeans IDE to prepare your
+   applications for distribution and then deploying those applications. In addition, this document
+   provides information that you might need to configure your system (or which you might need to pass on
+   to the users of your application). We will show a few different approaches for deploying an
+   application, so that users can access the application by:
+     * Double-clicking the application's Java Archive (JAR) file.
+     * Calling the application from the command line.
+     * Calling the application from a script file.
+
+   Along the way, we will cover some basics of JAR file structure and how JAR files are dealt with
+   inside IDE projects.
+
+   Expected duration: 30 minutes for the main exercise and 15 minutes for the optional exercise.
+
+Prerequisites
+   This tutorial has no prerequisites.
+   Software or Resource Version Required
+   NetBeans IDE Java SE, Java, or All bundle
+   Java Development Kit (JDK) version 6 or
+   version 5
+
+Tutorial Exercises
+     * Setup: Installing and Configuring the Tutorial Environment
+     * Main Exercise: Creating and Distributing Executable JAR Files
+     * Optional Exercise: Starting Your Java Application From the Command Line
+
+Setup: Installing and Configuring the Tutorial Environment
+   Download the DeploymentTutorial.zip file and unpack it on to your system. This zip file contains
+   source files for the application plus a few other files that will be useful for the tutorial.
+
+   On Microsoft Windows systems, use WinZip or similar archive packaging software to extract the files.
+
+   To unpack the zip file on a UNIX platform, change directories to the location of the zip file and
+   type the following in a terminal window:
+$ unzip DeploymentTutorial.zip
+
+Main Exercise: Creating and Distributing Executable JAR Files
+   The goal of this exercise is to show you how to create a distributable application from the IDE and
+   then run that application from outside of the IDE. We will package the application in the form of an
+   executable JAR file. A JAR file is an archive file that can contain multiple files and folders. JAR
+   files are similar to zip files, but JAR files can have additional attributes that are useful for
+   distributing Java applications.
+
+   In this exercise, you create an IDE project and then place two pre-written Java source files into
+   that project. Then you will compile the classes and build an executable JAR file. Afterwards, you
+   will learn how to run the JAR file from outside of the IDE.
+
+   These classes implement features of the GNU grep utility, which can be used for searching text or
+   regular expression patterns inside text files. The project contains both command-line and GUI
+   versions of the application, so that you can see different ways of running the application.
+
+Setting Up the Project
+   To set up the project:
+    1. In NetBeans IDE, choose File > New Project.
+    2. In the General Category page of the New Project wizard, select Java Project With Existing
+       Sources. Click Next.
+    3. On the Name and Location page of the wizard, fill in a name and folder for your project. Leave
+       the Set as Main Project checkbox selected. Click Next.
+       For example, type AnotherGrep for Project Name. For the Project Folder field, you can just accept
+       the default.
+       The project folder does not have to be in the same location as the source files that you are
+       importing into the project.
+    4. On the Existing Sources page of the wizard, you specify the sources that will be in the project.
+       Click the Add Folder button that is to the right of the Source Package Folders field. Then
+       navigate to the DeploymentTutorial folder that you have just unzipped on your system, expand the
+       folder, select the src folder, and click Open. The src folder is added to your Source Package
+       Folders field.
+    5. Click Finish.
+
+   The project opens in the IDE and becomes visibile in the Projects window. You can explore the
+   contents of the project by expanding the project's Source Packages node, where you should see classes
+   called Grep and xGrep. Grep.java is a console version of the application. xGrep.java is a GUI version
+   of the application and uses methods defined in Grep.java.
+
+Configuring the Project
+   At this point, you have all of the source code that you need to make the project work. However, there
+   is some more configuration that you need to do. You need to:
+     * Set the project's main class. By doing this, you ensure that the JAR file that you create when
+       you build the project is executable.
+     * Add the Swing Layout Extensions library to the project. This step is necessary because xGrep.java
+       uses the new GroupLayout layout manager classes, which are not currently included in the JDK.
+       (GroupLayout will be added to JDK 6.)
+
+Setting the Main Class
+   In order for a user to easily run your JAR file (by double-clicking the JAR file or by typing java
+   -jar AnotherGrep.jar at the command line), a main class has to be specified inside the JAR's manifest
+   file. (The manifest is a standard part of the JAR file that contains information about the JAR file
+   that is useful for the java launcher when you want to run the application.)
+
+   When you build a project, the IDE builds the JAR file and includes a manifest. When you set the
+   project's main class, you ensure that the main class will be designated in the manifest when you
+   later build the project.
+
+   To set the project's main class:
+    1. Right-click the project's node and choose Properties.
+    2. Select the Run panel and enter anothergrep.xGrep in the Main Class field.
+    3. Click OK to close the Project Properties dialog box.
+
+   When you build the project later in this tutorial, the manifest will be generated and include the
+   following entry:
+Main-Class: anothergrep.xGRep
+
+Adding Necessary Libraries
+   If the project you are developing relies on code from other libraries, you need to point to those
+   libraries from your project. This is necessary for your project to compile properly and for the
+   application to be easily distributable.
+
+   You can add libraries to a project through the Libraries node of the project.
+
+   In this example, xGrep.java relies on the the new GroupLayout layout manager classes, which are not
+   currently included in the JDK. (GroupLayout will be added to JDK 6.) For now, the GroupLayout classes
+   are available in the Swing Layout Extensions library. The IDE includes the Swing Layout Extensions
+   library in its Library Manager, so it easy to add to your project.
+
+   To add the Swing Layout Extensions library:
+    1. Right-click the project's Libraries node and choose Add Library.
+    2. In the Add Library dialog box, select Swing Layout Extensions and click Add Library.
+    3. Click OK to close the Project Properties dialog box.
+
+   Note: If you find that the Swing Layout Extensions has already been added to your project, this might
+   be a result of you having opened the xGrep.java file in the IDE. When you open a file that uses
+   classes from the Swing Layout Extensions library or when you create an application using the Matisse
+   GUI Builder, the IDE automatically adds the Swing Layout Extensions library to the project. The
+   automatic adding of libraries in this fashion does not work for other libraries.
+
+   When you later build the project, the following entry is added to the application JAR file's
+   manifest:
+Class-Path: lib/swing-layout-1.0.jar
+
+   Note:
+   You can also add an arbitrary JAR file or folder (using the Add JAR/Folder command) or the output of
+   another project (using the Add Project command).
+
+Building the Project and Creating the JAR File
+   Now that you have your sources ready and your project configured, it is time to build your project.
+
+   To build the project:
+     * Choose Build > Build Main Project.
+
+   When you build your project:
+     * build and dist folders are added to your project folder (hereafter referred to as the
+       PROJECT_HOME folder).
+     * All of the sources are compiled into .class files, which are placed into the PROJECT_HOME/build
+       folder.
+     * A JAR file containing your project is created inside the PROJECT_HOME/dist folder.
+     * If you have specified any libraries for the project (in addition to the JDK), a lib folder is
+       created in the dist folder. The libraries are copied into dist/lib.
+     * The manifest file in the JAR is updated to include entries that designate main class and any
+       libraries that are on the project's classpath.
+
+   Note: You can view the contents of the manifest in the IDE's Files window. After you have built your
+   project, switch to the Files window and navigate to dist/AnotherGrep.jar. Expand the node for the JAR
+   file, expand the META-INF folder, and double-click MANIFEST.MF to display the manifest in the Source
+   Editor.
+Main-Class: anothergrep.xGRep
+            Class-Path: lib/swing-layout-1.0.jar
+
+   (To find more about manifest files, you can read:
+   ... [http://java.sun.com/docs/books/tutorial/deployment/jar/manifestindex.html] ...
+   chapter from the Java Tutorial.)
+
+Running the Application Inside of the IDE
+   When developing applications in the IDE, typically you will need to test and refine them before
+   distributing them. You can easily test an application that you are working on by running the
+   application from the IDE.
+
+   To run the AnotherGrep project in the IDE, right-clicking the project's node (AnotherGrep) in the
+   Projects window and choose Run Project.
+
+   The xGrep window should open. You can click the Browse button to choose a file in which to search for
+   a text pattern. In the Search Pattern field, type text or a regular expression pattern that you would
+   like to match, and click Search. The results of each match will appear in the xGrep window's Output
+   area.
+
+   Information on regular expressions that you can use in this application are available here and in
+   many other places on the World Wide Web.
+
+Running the Application Outside of the IDE
+   Once you have finished developing the application and before you distribute it, you will probably
+   want to make sure that the application also works outside of the IDE.
+
+   You can run the application outside of the IDE by following these steps:
+     * In your system's file manager (for example, in the My Computer window on Windows XP systems),
+       navigate to PROJECT_HOME/dist and double-click the AnotherGrep.jar file.
+
+   You will know that the application has started successfully when the xGrep window opens.
+
+   If the xGrep window does not open, your system probably does not have a file association between JAR
+   files and the Java Runtime Environment. See Troubleshooting JAR File Associations below.
+
+Distributing the Application to Other Users
+   Now that you have verified that the application works outside of the IDE, you are ready to distribute
+   it.
+
+   You can distribute the application by following these steps:
+    1. Create a zip file that contains the application JAR file (AnotherGrep.jar) and the accompanying
+       lib folder that contains swing-layout-1.0.jar.
+    2. Send the file to the people who will use the application. Instruct them to unpack the zip file,
+       making sure that the AnotherGrep.jar file and the lib folder are in the same folder.
+       The users of your application should be able to run it by double-clicking the JAR file. If this
+       does not work for them, show them the information in the Troubleshooting JAR File
+       Associations section below.
+
+Troubleshooting JAR File Associations
+   On most systems, you can execute an executable JAR file by simply double-clicking the JAR file. If
+   nothing happens when you double-click the JAR file, it might be because of either of the following
+   two reasons:
+     * The JAR file type is probably not associated with a Java Runtime Environment (JRE) on that
+       system.
+       If the JAR file type is associated with a JRE, the icon that represents that file should include
+       a Java logo.
+     * The JAR file type is associated with the JRE, but the -jar option is not included in the command
+       that is passed to the JRE when you double-click the icon.
+
+   Note: Sometimes JAR file associations are switched by software that you install, such as software to
+   handle zip files.
+
+   To add the JAR file association on Microsoft Windows systems:
+    1. Make sure that there is a version of the JRE installed on your system. You should use version
+       1.4.2 or later. (If you have the JDK installed, you also get the JRE. However, if you are
+       distributing the program to a non-programmer, that person does not necessarily have either the
+       JRE or the JDK.)
+       On Windows XP, you can check for installed versions of the JRE by choosing Start > Control Panel
+       > Add or Remove Software.
+       If there is not a JRE on the system, you can get one from the Java SE download site.
+       If you have a JRE installed on your system but the file association is not working, continue with
+       the steps below.
+    2. Choose Start > Control Panel.
+    3. Double-click Folder Options.
+    4. Select the File Types tab.
+    5. In the Registered File Types list, select JAR File.
+    6. In the Details section of the dialog box, click Change.
+    7. In the Open With dialog box, select Java Platform SE Binary.
+    8. Click OK to exit the Open With dialog box.
+    9. Click Close to exit the Folder Options dialog box.
+
+   If JAR files are associated with the Java Platform SE Binary on your system but double-clicking still
+   does not execute the file JAR file, you might need to specify the -jar option in the file
+   association.
+
+   To specify the -jar option in the file association:
+    1. Choose Start > Control Panel.
+    2. Double-click Folder Options.
+    3. Select the File Types tab.
+    4. In the Registered File Types list, select JAR File.
+    5. In the Details section of the dialog box, click Advanced.
+    6. In the Edit File Type dialog box, click Edit.
+    7. In the Application Used to Perform Action text field, add the following at the end of the path to
+       the JRE:
+ -jar "%1" %*
+       Afterwards, the field should contain text similar to the following:
+"C:\Program Files\Java\jre1.6.0_14\bin\javaw.exe" -jar "%1" %*
+    8. Click OK to exit the Editing Action for Type dialog box.
+    9. Click OK to exit the Edit File Type dialog box.
+   10. Click Close to exit the Folder Options dialog box.
+
+   For UNIX and Linux systems, the procedure for changing file associations depends on which desktop
+   environment (such as GNOME or KDE) that you are using. Look in your desktop environment's preference
+   settings or consult the documentation for the desktop environment.
+
+Optional Exercise: Starting Your Java Application From the Command Line
+   The goal of this exercise is to show you some ways that you can start your application from the
+   command line.
+
+   This exercise shows you how you can start a Java application in the following two ways:
+     * Running the java command from the command line.
+     * Using a script to a call a class in the JAR file.
+
+Launching Applications From the Command Line
+   You can launch an application from the command line by using the java command. If you want to run an
+   executable JAR file, use the -jar option of the command.
+
+   For example, to run the AnotherGrep application, you would take the following steps:
+    1. Open a terminal window. On Microsoft Windows systems, you do this by choosing Start > Run, typing
+       cmd in the Open field, and clicking OK.
+    2. Change directories to the PROJECT_HOME/dist folder (using the cd command).
+    3. Type the following line to run the application's main class:
+java -jar AnotherGrep.jar
+
+   If you follow these steps and the application does not run, you probably need to do one of the
+   following things:
+     * Include the path to the java binary in the third step of the procedure. For example, you would
+       type something like the following, depending on where your JDK or JRE is located:
+C:\Program Files\Java\jdk1.6.0_14\bin\java -jar AnotherGrep.jar
+     * Add the Java binaries to your PATH environment variable, so that you never have to specify the
+       path to the java binary from the command line. See Setting the PATH Environment Variable.
+
+Launching Applications From a Script
+   If the application that you want to distribute is a console application, you might find that it is
+   convenient to start the application from a a script, particularly if the application takes long and
+   complex arguments to run. In this section, you will use a console version of the Grep program, where
+   you need to pass the arguments (search pattern and file list) to the JAR file, which will be invoked
+   in our script. To reduce typing at the command line, you will use a simple script suitable to run the
+   test application.
+
+   First you need to change the main class in the application to be the console version of the class and
+   rebuild the JAR file:
+    1. In the IDE's Projects window, right-click the project node (AnotherGrep) and choose Properties.
+    2. Select the Run node and change the Main Class property to anothergrep.Grep (from
+       anothergrep.xGrep). Click OK to close the Project Properties window.
+    3. Right-click the project's node again and choose Clean and Build Project.
+
+   After completing these steps, the JAR file is rebuilt, and the Main-Class attribute of the JAR file's
+   manifest is changed to point to anothergrep.Grep.
+
+BASH script -- for UNIX and Linux machines
+   Inside PROJECT_HOME, there is a grep.sh bash script. Have a look at it:
+#!/bin/bash
+                    java -jar dist/AnotherGrep.jar $@
+
+   The first line states which shell should be used to interpret this. The second one executes your JAR
+   file, created by the IDE inside PROJECT_HOME/dist folder. $@ just copies all given arguments,
+   enclosing each inside quotes.
+
+   This script presumes that the Java binaries are part of your PATH environment variable. If the script
+   does not work for you, see Setting the PATH Environment Variable.
+
+
+.bat script for Windows machines
+   On Microsoft Windows systems, you can only pass nine arguments at once to a batch file. If there were
+   more than nine arguments, you would need to execute the JAR file multiple times.
+
+   A script handling this might look like the following:
+                @echo off
+                set jarpath="dist/AnotherGrep.jar"
+                set pattern="%1"
+                shift
+                :loop
+                  if "%1" == "" goto :allprocessed
+                  set files=%1 %2 %3 %4 %5 %6 %7 %8 %9
+                  java -jar %jarpath% %pattern% %files%
+                  for %%i in (0 1 2 3 4 5 6 7 8) do shift
+                goto :loop
+
+                :allprocessed
+
+   This script is included inside PROJECT_HOME as grep.bat so you can try it out.
+
+   The nine arguments are represented inside the batch file by %<ARG_NUMBER>, where <ARG_NUMBER> has to
+   be inside <0-9>. %0 is reserved for the script name.
+
+   You can see that only nine arguments are passed to the program at a time (in one loop). The for
+   statement just shifts the arguments by nine, to prepare it for next loop. Once an empty file argument
+   is detected by the if statement (there are no further files to process), the loop is ended.
+
+Setting the PATH Environment Variable
+   If you can not run a Java class or JAR file on your system without pointing to the location of the
+   JDK or JRE on your system, you might need to modify the value of your system's PATH variable.
+
+   If you are running on a Microsoft Windows system, the procedure for setting the PATH variable depends
+   the version of Windows you are using.
+
+   The following are the steps for setting the PATH variable on a Windows XP system:
+    1. Choose Start > Control Panel and double-click System.
+    2. In the System Properties dialog box, click the Advanced tab.
+    3. Click the Environment Variables tab.
+    4. In the list of user variables, select PATH and click Edit.
+    5. Add the location of the JRE to the end of the list of paths. The locations in this list are
+       separated by semicolons (;).
+       For example, if your JRE is located at
+C:\Program Files\Java\jdk1.6.0_14
+       you would add the following to the end of the PATH variable:
+C:\Program Files\Java\jdk1.6.0_14\bin
+    6. Click OK to exit the Environment Variables dialog box, and click OK to exit the System Properties
+       dialog box.
+
+   If you are running on a UNIX or Linux system, the instructions for modifying your PATH variable
+   depends on the shell program you are using. Consult the documentation of the shell that you are using
+   for more information.
+
+Next Steps
+   For more information on working with NetBeans IDE, see the Support and Docs page on the NetBeans
+   website.
+
+   To send comments and suggestions, get support, and keep informed on the latest developments on the
+   NetBeans IDE development features, join the nbusers@netbeans.org mailing list.
+
+   You also might want to consider using [http://java.sun.com/products/javawebstart/]Java Web Start technology,
+   which enables users to click once to download and run a client-side application.
+
+
+---

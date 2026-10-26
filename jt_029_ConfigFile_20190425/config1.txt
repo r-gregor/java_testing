@@ -1,0 +1,3 @@
+full_name = Gregor Redelonghi
+age = 51
+date = 20190420

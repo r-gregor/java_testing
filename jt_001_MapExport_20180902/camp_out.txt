@@ -1,0 +1,5 @@
+avto,20,20
+odrasli,40,50
+elektrika,20,20
+otroci,20,25
+parcela,70,80

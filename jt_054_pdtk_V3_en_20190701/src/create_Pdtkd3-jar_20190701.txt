@@ -1,0 +1,2 @@
+jar -cvfe Pdtkd3.jar Pdtkd *.class
+

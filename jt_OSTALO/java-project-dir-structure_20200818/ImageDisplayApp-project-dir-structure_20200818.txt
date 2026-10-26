@@ -1,0 +1,29 @@
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/majstaf/BRISI/TTEESSTT/20200818]
+$> tree
+.
+`-- ImageDisplayApp/
+    |-- build/
+    |   `-- classes/
+    |       `-- org/
+    |           `-- me/
+    |               `-- myimageapp/
+    |                   |-- ImageDisplay.class
+    |                   `-- newpackage/
+    |                       `-- image.png
+    |-- dist/
+    |   |-- ImageDisplayApp.jar
+    |   |  ***************************************
+    |   |  * |-- META.INF/                       *
+    |   |  * |-- org.me.myimageapp/              *
+    |   |  * |   `-- ImageDisplay.class          *
+    |   |  * `-- org.me.myimageapp.newpackage/   *
+    |   |  *     `-- image.png                   *
+    |   |  ***************************************   
+    |   `-- README.TXT
+    `-- src/
+        `-- org/
+            `-- me/
+                `-- myimageapp/
+                    |-- ImageDisplay.java
+                    `-- newpackage/
+                        `-- image.png

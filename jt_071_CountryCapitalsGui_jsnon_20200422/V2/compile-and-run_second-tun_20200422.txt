@@ -1,0 +1,57 @@
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/src]
+$> mkdir ../classes2
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/src]
+$> cp -r lib/ country-capitals.json ../classes2
+'lib/' -> '../classes2/lib'
+'lib/json-simple-1.1.jar' -> '../classes2/lib/json-simple-1.1.jar'
+'country-capitals.json' -> '../classes2/country-capitals.json'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/src]
+$> mkdir ../jars2
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/src]
+$> cp -r lib/ ../jars2/
+'lib/' -> '../jars2/lib'
+'lib/json-simple-1.1.jar' -> '../jars2/lib/json-simple-1.1.jar'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/src]
+$> javac -d ../classes2 --module-path $PATH_TO_FX --add-modules=javafx.controls -cp lib/json-simple-1.1.jar\;. *.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/src]
+$> cd ../classes2/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/classes2]
+$> cp ../classes/manifest.txt ./
+'../classes/manifest.txt' -> './manifest.txt'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/classes2]
+$> jar -cvfm ../jars2/CountriesCapitalsGUI.jar manifest.txt lib/ *.class *.json
+added manifest
+adding: lib/(in = 0) (out= 0)(stored 0%)
+adding: lib/json-simple-1.1.jar(in = 16046) (out= 13991)(deflated 12%)
+adding: Countries3.class(in = 3062) (out= 1589)(deflated 48%)
+adding: CountriesCapitalsGUI3$1.class(in = 1767) (out= 823)(deflated 53%)
+adding: CountriesCapitalsGUI3.class(in = 4551) (out= 2245)(deflated 50%)
+adding: Country.class(in = 1020) (out= 477)(deflated 53%)
+adding: country-capitals.json(in = 40247) (out= 6860)(deflated 82%)
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/classes2]
+$> cd ../jars2/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/jars2]
+$> tree
+.
+|-- CountriesCapitalsGUI.jar
+`-- lib
+    `-- json-simple-1.1.jar
+    
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/jars2]
+$> jarxrun CountriesCapitalsGUI.jar
+*** OK ***
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/jars2]
+$> java -jar --module-path $PATH_TO_FX --add-modules=javafx.controls CountriesCapitalsGUI.jar
+*** OK ***
+
+# /usr/local/bin/jarxrun(.sh) --> java -jar --module-path $PATH_TO_FX --add-modules=javafx.controls [Filename.jar] ...

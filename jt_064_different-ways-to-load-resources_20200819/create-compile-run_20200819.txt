@@ -1,0 +1,309 @@
+from: https://www.logicbig.com/how-to/java/different-ways-to-load-resources.html
+(/c/Users/gregor.redelonghi/Dropbox/ODPRTO/_JAVA//jv_different-ways-to-load-resources_20200423.txt)
+
+$> cd BRISI/TTEESSTT/
+$> mkdir 20200819
+$> cd 20200819
+$> mkdir -p load-resource/com/logicbig/example
+$> touch load-resource/root-resource.txt
+$> touch load-resource/com/logicbig/example/{ClassA.java,test.pkg.resource.txt}
+$> nano load-resource/com/logicbig/example/test-pkg-resource.txt
+$> nano load-resource/root-resource.txt
+$> code load-resource/com/logicbig/example
+
+<code>
+// ClassA.java
+package com.logicbig.example;
+
+
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+public class ClassA {
+
+    private static final String line = "-----------------------------------------";
+
+    private void loadResource (String resource) throws IOException {
+        URL u = this.getClass().getResource(resource);
+        loadResourceByUrl(u, resource);
+    }
+
+    private void loadResourceWithContextLoader (String resource) throws IOException {
+        URL u = Thread.currentThread().getContextClassLoader().getResource(resource);
+        loadResourceByUrl(u, resource);
+    }
+
+    private void loadResourceWithSystemClassLoader (String resource) throws IOException {
+        URL u = ClassLoader.getSystemClassLoader().getResource(resource);
+        loadResourceByUrl(u, resource);
+    }
+
+    private void loadResourceByUrl (URL u, String resource) throws IOException {
+        System.out.println("-> attempting input resource: "+resource);
+        if (u != null) {
+            String path = u.getPath();
+            path = path.replaceFirst("^/(.:/)", "$1");
+            System.out.println("    absolute resource path found :\n    " + path);
+            String s = new String(Files.readAllBytes(Paths.get(path)));
+            System.out.println("    file content: "+s);
+        } else {
+            System.out.println("    no resource found: " + resource);
+        }
+    }
+
+    public static void main (String[] args) throws IOException {
+        ClassA a = new ClassA();
+        System.out.println(line+"\nusing this.getClass().getResource\n"+line);
+        a.loadResource("test-pkg-resource.txt");
+        a.loadResource("/test-pkg-resource.txt");
+        a.loadResource("root-resource.txt");
+        a.loadResource("/root-resource.txt");
+
+        System.out.println(line+"\n using current thread context loader\n"+line);
+        a.loadResourceWithContextLoader("test-pkg-resource.txt");
+        a.loadResourceWithContextLoader("/test-pkg-resource.txt");
+        a.loadResourceWithContextLoader("root-resource.txt");
+        a.loadResourceWithContextLoader("/root-resource.txt");
+
+
+        System.out.println(line+"\n using ClassLoader.getSystemClassLoader()\n"+line);
+        a.loadResourceWithSystemClassLoader("test-pkg-resource.txt");
+        a.loadResourceWithSystemClassLoader("/test-pkg-resource.txt");
+        a.loadResourceWithSystemClassLoader("root-resource.txt");
+        a.loadResourceWithSystemClassLoader("/root-resource.txt");
+
+    }
+}
+
+</code>
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource]
+$> cd src
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource]
+$> tree
+.
+|-- com
+|   `-- logicbig
+|       `-- example
+|           |-- ClassA.java
+|           `-- test-pkg-resource.txt
+`-- root-resource.txt
+
+# Compiling with javac
+# By default javac compiles the java source files in the same directory. In above example if we run this
+# command:
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource]
+$> javac com/logicbig/example/ClassA.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource]
+$> tree
+.
+|-- com
+|   `-- logicbig
+|       `-- example
+|           |-- ClassA.class [** newly compiled class **]
+|           |-- ClassA.java
+|           `-- test-pkg-resource.txt
+`-- root-resource.txt
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource]
+$> java com.logicbig.example.ClassA
+-----------------------------------------
+using this.getClass().getResource
+-----------------------------------------
+-> attempting input resource: test-pkg-resource.txt
+    absolute resource path found :
+    C:/Users/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/com/logicbig/example/test-pkg-resource.txt
+    file content: test file, local to package
+-> attempting input resource: /test-pkg-resource.txt
+    no resource found: /test-pkg-resource.txt
+-> attempting input resource: root-resource.txt
+    no resource found: root-resource.txt
+-> attempting input resource: /root-resource.txt
+    absolute resource path found :
+    C:/Users/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/root-resource.txt
+    file content: root test file
+
+-----------------------------------------
+ using current thread context loader
+-----------------------------------------
+-> attempting input resource: test-pkg-resource.txt
+    no resource found: test-pkg-resource.txt
+-> attempting input resource: /test-pkg-resource.txt
+    no resource found: /test-pkg-resource.txt
+-> attempting input resource: root-resource.txt
+    absolute resource path found :
+    C:/Users/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/root-resource.txt
+    file content: root test file
+-> attempting input resource: /root-resource.txt
+    no resource found: /root-resource.txt
+-----------------------------------------
+ using ClassLoader.getSystemClassLoader()
+-----------------------------------------
+-> attempting input resource: test-pkg-resource.txt
+    no resource found: test-pkg-resource.txt
+-> attempting input resource: /test-pkg-resource.txt
+    no resource found: /test-pkg-resource.txt
+-> attempting input resource: root-resource.txt
+    absolute resource path found :
+    C:/Users/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/root-resource.txt
+    file content: root test file
+-> attempting input resource: /root-resource.txt
+    no resource found: /root-resource.txt
+
+# Compiling with javac using the output folder option
+ 
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource]
+$> rm com/logicbig/example/*.class
+removed 'com/logicbig/example/ClassA.class'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource]
+$> javac -d output com/logicbig/example/ClassA.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource]
+$> tree
+.
+|-- com
+|   `-- logicbig
+|       `-- example
+|           |-- ClassA.java
+|           `-- test-pkg-resource.txt
+|-- output
+|   `-- com
+|       `-- logicbig
+|           `-- example
+|               `-- ClassA.class
+`-- root-resource.txt
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource]
+$> cp com/logicbig/example/test-pkg-resource.txt output/com/logicbig/example/
+'com/logicbig/example/test-pkg-resource.txt' -> 'output/com/logicbig/example/test-pkg-resource.txt'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource]
+$> tree
+.
+|-- com
+|   `-- logicbig
+|       `-- example
+|           |-- ClassA.java
+|           `-- test-pkg-resource.txt
+|-- output
+|   `-- com
+|       `-- logicbig
+|           `-- example
+|               |-- ClassA.class
+|               `-- test-pkg-resource.txt
+`-- root-resource.txt
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource]
+$> java -cp output\;. com.logicbig.example.ClassA
+-----------------------------------------
+using this.getClass().getResource
+-----------------------------------------
+-> attempting input resource: test-pkg-resource.txt
+    absolute resource path found :
+    C:/Users/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/output/com/logicbig/example/test-pkg-resource.txt
+    file content: test file, local to package
+-> attempting input resource: /test-pkg-resource.txt
+    no resource found: /test-pkg-resource.txt
+-> attempting input resource: root-resource.txt
+    no resource found: root-resource.txt
+-> attempting input resource: /root-resource.txt
+    absolute resource path found :
+    C:/Users/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/root-resource.txt
+    file content: root test file
+
+-----------------------------------------
+ using current thread context loader
+-----------------------------------------
+-> attempting input resource: test-pkg-resource.txt
+    no resource found: test-pkg-resource.txt
+-> attempting input resource: /test-pkg-resource.txt
+    no resource found: /test-pkg-resource.txt
+-> attempting input resource: root-resource.txt
+    absolute resource path found :
+    C:/Users/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/root-resource.txt
+    file content: root test file
+-> attempting input resource: /root-resource.txt
+    no resource found: /root-resource.txt
+-----------------------------------------
+ using ClassLoader.getSystemClassLoader()
+-----------------------------------------
+-> attempting input resource: test-pkg-resource.txt
+    no resource found: test-pkg-resource.txt
+-> attempting input resource: /test-pkg-resource.txt
+    no resource found: /test-pkg-resource.txt
+-> attempting input resource: root-resource.txt
+    absolute resource path found :
+    C:/Users/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/root-resource.txt
+    file content: root test file
+-> attempting input resource: /root-resource.txt
+    no resource found: /root-resource.txt
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource]
+$> cp root-resource.txt output/
+'root-resource.txt' -> 'output/root-resource.txt'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource]
+$> cd output/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/output]
+$> tree
+.
+|-- com
+|   `-- logicbig
+|       `-- example
+|           |-- ClassA.class
+|           `-- test-pkg-resource.txt
+`-- root-resource.txt
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/output]
+$> java com.logicbig.example.ClassA
+-----------------------------------------
+using this.getClass().getResource
+-----------------------------------------
+-> attempting input resource: test-pkg-resource.txt
+    absolute resource path found :
+    C:/Users/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/output/com/logicbig/example/test-pkg-resource.txt
+    file content: test file, local to package
+-> attempting input resource: /test-pkg-resource.txt
+    no resource found: /test-pkg-resource.txt
+-> attempting input resource: root-resource.txt
+    no resource found: root-resource.txt
+-> attempting input resource: /root-resource.txt
+    absolute resource path found :
+    C:/Users/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/output/root-resource.txt
+    file content: root test file
+
+-----------------------------------------
+ using current thread context loader
+-----------------------------------------
+-> attempting input resource: test-pkg-resource.txt
+    no resource found: test-pkg-resource.txt
+-> attempting input resource: /test-pkg-resource.txt
+    no resource found: /test-pkg-resource.txt
+-> attempting input resource: root-resource.txt
+    absolute resource path found :
+    C:/Users/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/output/root-resource.txt
+    file content: root test file
+-> attempting input resource: /root-resource.txt
+    no resource found: /root-resource.txt
+-----------------------------------------
+ using ClassLoader.getSystemClassLoader()
+-----------------------------------------
+-> attempting input resource: test-pkg-resource.txt
+    no resource found: test-pkg-resource.txt
+-> attempting input resource: /test-pkg-resource.txt
+    no resource found: /test-pkg-resource.txt
+-> attempting input resource: root-resource.txt
+    absolute resource path found :
+    C:/Users/gregor.redelonghi/BRISI/TTEESSTT/20200819/load-resource/output/root-resource.txt
+    file content: root test file
+-> attempting input resource: /root-resource.txt
+    no resource found: /root-resource.txt
+
+
+

@@ -1,0 +1,1 @@
+jar --create --file=GetFmemInfo.jar --main-class=GetFmemInfo -v -C ../classes/ .

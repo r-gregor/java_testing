@@ -1,0 +1,6 @@
+# from dir with *.class files
+jar -cvfe ../jars/RsortByEnddate.jar RsortByEnddate *.class
+
+# or from project dir (no package):
+jar -cvfe jars/RsortByEnddate.jar RsortByEnddate -C classes .
+

@@ -1,0 +1,230 @@
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular]
+$> mkdir V1_separate-libs
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular]
+$> mkdir V2_all-ext-in-same-folder
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular]
+$> cp -r src/ V1_separate-libs/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular]
+$> cp -r src/ V2_all-ext-in-same-folder/
+
+# V1
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular]
+$> cd V1_separate-libs/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/src]
+$> tree
+.
+|-- libs
+|   |-- App1.jar
+|   `-- App2.jar
+|-- module-info.java
+`-- org.rgregor.mainapp
+    `-- org
+        `-- rgregor
+            `-- mainapp
+                `-- Mainapp.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/src]
+$> javac -d out2 --module-path libs module-info.java org.rgregor.mainapp/org/rgregor/mainapp/Mainapp.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/src]
+$> tree
+.
+|-- libs
+|   |-- App1.jar
+|   `-- App2.jar
+|-- module-info.java
+|-- org.rgregor.mainapp
+|   `-- org
+|       `-- rgregor
+|           `-- mainapp
+|               `-- Mainapp.java
+`-- out2
+    |-- module-info.class
+    `-- org
+        `-- rgregor
+            `-- mainapp
+                `-- Mainapp.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/src]
+$> java --module-path out2\;libs --module org.rgregor.mainapp/org.rgregor.mainapp.Mainapp
+App1 initialized ...
+This is App1
+Original 100,000000 --> double: 200,000000
+App2 initialized ...
+This is App2
+Original 10 --> squared: 100
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/src]
+$> mkdir jars1
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/src]
+$> jar --create --file jars1/Mainapp1.jar --main-class org.rgregor.mainapp.Mainapp -C out2/ .
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/src]
+$> tree
+.
+|-- jars1
+|   `-- Mainapp1.jar
+|-- libs
+|   |-- App1.jar
+|   `-- App2.jar
+|-- module-info.java
+|-- org.rgregor.mainapp
+|   `-- org
+|       `-- rgregor
+|           `-- mainapp
+|               `-- Mainapp.java
+`-- out2
+    |-- module-info.class
+    `-- org
+        `-- rgregor
+            `-- mainapp
+                `-- Mainapp.class
+
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/src]
+$> java -p jars1\;libs -m org.rgregor.mainapp
+App1 initialized ...
+This is App1
+Original 100,000000 --> double: 200,000000
+App2 initialized ...
+This is App2
+Original 10 --> squared: 100
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/src]
+$> cp libs/App* jars1/
+'libs/App1.jar' -> 'jars1/App1.jar'
+'libs/App2.jar' -> 'jars1/App2.jar'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/src]
+$> tree
+.
+|-- jars1
+|   |-- App1.jar
+|   |-- App2.jar
+|   `-- Mainapp1.jar
+|-- libs
+|   |-- App1.jar
+|   `-- App2.jar
+|-- module-info.java
+|-- org.rgregor.mainapp
+|   `-- org
+|       `-- rgregor
+|           `-- mainapp
+|               `-- Mainapp.java
+`-- out2
+    |-- module-info.class
+    `-- org
+        `-- rgregor
+            `-- mainapp
+                `-- Mainapp.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/src]
+$> java -p jars1 -m org.rgregor.mainapp
+App1 initialized ...
+This is App1
+Original 100,000000 --> double: 200,000000
+App2 initialized ...
+This is App2
+Original 10 --> squared: 100
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/src]
+$> mv jars1/ ../
+'jars1/' -> '../jars1'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/src]
+$> cd ..
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular]
+$> tree
+.
+|-- jars1
+|   |-- App1.jar
+|   |-- App2.jar
+|   `-- Mainapp1.jar
+|-- src
+|   |-- libs
+|   |   |-- App1.jar
+|   |   `-- App2.jar
+|   |-- module-info.java
+|   |-- org.rgregor.mainapp
+|   |   `-- org
+|   |       `-- rgregor
+|   |           `-- mainapp
+|   |               `-- Mainapp.java
+|   `-- out2
+|       |-- module-info.class
+|       `-- org
+|           `-- rgregor
+|               `-- mainapp
+|                   `-- Mainapp.class
+`-- V1_separate-libs_compile-run_20200813.txt
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular]
+$> java -p jars1 -m org.rgregor.mainapp
+App1 initialized ...
+This is App1
+Original 100,000000 --> double: 200,000000
+App2 initialized ...
+This is App2
+Original 10 --> squared: 100
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular]
+$> mkdir jars2
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular]
+$> cp jars1/Mainapp1.jar jars2
+'jars1/Mainapp1.jar' -> 'jars2/Mainapp1.jar'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular]
+$> cp -r src/libs jars2/
+'src/libs' -> 'jars2/libs'
+'src/libs/App2.jar' -> 'jars2/libs/App2.jar'
+'src/libs/App1.jar' -> 'jars2/libs/App1.jar'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular]
+$> tree
+.
+|-- jars1
+|   |-- App1.jar
+|   |-- App2.jar
+|   `-- Mainapp1.jar
+|-- jars2
+|   |-- libs
+|   |   |-- App1.jar
+|   |   `-- App2.jar
+|   `-- Mainapp1.jar
+|-- src
+|   |-- libs
+|   |   |-- App1.jar
+|   |   `-- App2.jar
+|   |-- module-info.java
+|   |-- org.rgregor.mainapp
+|   |   `-- org
+|   |       `-- rgregor
+|   |           `-- mainapp
+|   |               `-- Mainapp.java
+|   `-- out2
+|       |-- module-info.class
+|       `-- org
+|           `-- rgregor
+|               `-- mainapp
+|                   `-- Mainapp.class
+`-- V1_separate-libs_compile-run_20200813.txt
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular]
+$> cd jars2
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn080_jars-with-external-jars-test_20200806/application-modular/jars2]
+$> java -p libs\;. -m org.rgregor.mainapp
+App1 initialized ...
+This is App1
+Original 100,000000 --> double: 200,000000
+App2 initialized ...
+This is App2
+Original 10 --> squared: 100
+

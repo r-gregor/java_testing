@@ -1,0 +1,13 @@
+Usage 20190508:
+
+$> java Main [dirname]
+    or
+$> jrun dirwalk_main.jar [dirname]
+
+if no [dirname] is given --> curent dir "." is used.
+
+[dirname] on cygwin (Win):  $(cygpath -w "/c/Users/gregor.redelonghi/ ...")
+                                    or
+                            "/Users/gregor.redelonghi/ ... " ("/" instead of "/c/")
+                                    or
+                            "c:\\Users\\gregor.redelonghi\\ ... "

@@ -1,0 +1,38 @@
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V1/src]
+$> tree
+.
+|-- Countries3.java
+|-- Country.java
+|-- country-capitals.json
+|-- lib
+|   `-- json-simple-1.1.jar
+`-- MainTest.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V1/src]
+$> javac -d ../classes -cp lib/json-simple-1.1.jar\;. MainTest.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V1/src]
+$> cd ../classes/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V1/classes]
+$> tree
+.
+|-- Countries3.class
+|-- Country.class
+|-- country-capitals.json
+|-- lib
+|   `-- json-simple-1.1.jar
+`-- MainTest.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V1/classes]
+$> java -cp lib/json-simple-1.1.jar\;. MainTest Panama
+Country: Panama
+Capital: Panama City
+Country code: PA
+Continent: Central America
+--------------------------------------
+Country: Panama
+Capital: Panama City
+Country code: PA
+Continent: Central America
+--------------------------------------

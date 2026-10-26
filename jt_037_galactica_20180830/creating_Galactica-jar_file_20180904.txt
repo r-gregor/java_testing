@@ -1,0 +1,3 @@
+jar -cvfe HvarIzracun.jar hvar/HvarIzracun hvar/*
+
+jar -cvfe Galactica.jar Galactica ./*

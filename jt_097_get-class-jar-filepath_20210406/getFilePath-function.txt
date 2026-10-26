@@ -1,0 +1,26 @@
+private String getFilePath(String fileName) throws Exception {
+	
+	File inputFile = new File(className.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+	
+	// input file of *jar file includes a *jar filename --> .getParent()!!
+	String jarFilePath = inputFile.getParent();
+
+	String classFilePath = inputFile;
+	
+	String type = className.class.getResource("className.class").toString();
+	String mypath = null;
+	if (type.startsWith("file")) {
+		mypath = classFilePath;
+	} else if (type.startsWith("jar")) {
+		mypath = jarFilePath;
+	} else {
+		System.out.println("No suitable file found!");
+		System.exit(0);
+	}
+	return mypath
+
+/**
+ *	// in main:
+ *	String myPath = [ClassName].getFilePath();
+ *	String myFilePath = myPath + File.separator + myFileNme;
+ */

@@ -1,0 +1,96 @@
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/src]
+$> tree
+.
+|-- Countries3.java
+|-- CountriesCapitalsGUI3.java
+|-- Country.java
+|-- country-capitals.json
+`-- lib
+    `-- json-simple-1.1.jar
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/src]
+$> mkdir ../classes/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/src]
+$> cp -r lib/ country-capitals.json ../classes/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/src]
+$> javac -d ../classes --module-path $PATH_TO_FX --add-modules=javafx.controls -cp lib/json-simple-1.1.jar\;. *.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/src]
+$> tree ../classes/
+../classes/
+|-- Countries3.class
+|-- CountriesCapitalsGUI3$1.class
+|-- CountriesCapitalsGUI3.class
+|-- Country.class
+|-- country-capitals.json
+`-- lib
+    `-- json-simple-1.1.jar
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/src]
+$> cd ../classes/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/classes]
+$> java --module-path $PATH_TO_FX --add-modules=javafx.controls -cp lib/json-simple-1.1.jar\;. CountriesCapitalsGUI3
+*** OK ***
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/classes]
+$> cat manifest.txt
+Manifest-Version: 1.0
+Main-class: CountriesCapitalsGUI3
+Class-path: lib/json-simple-1.1.jar
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/classes]
+$> jar -cvfm CountriesCapitalsGUI3.jar manifest.txt lib/ *.class *.json
+added manifest
+adding: lib/(in = 0) (out= 0)(stored 0%)
+adding: lib/json-simple-1.1.jar(in = 16046) (out= 13991)(deflated 12%)
+adding: Countries3.class(in = 3062) (out= 1589)(deflated 48%)
+adding: CountriesCapitalsGUI3$1.class(in = 1767) (out= 823)(deflated 53%)
+adding: CountriesCapitalsGUI3.class(in = 4575) (out= 2267)(deflated 50%)
+adding: Country.class(in = 1020) (out= 477)(deflated 53%)
+adding: country-capitals.json(in = 40247) (out= 6860)(deflated 82%)
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/classes]
+$> java -jar --module-path $PATH_TO_FX --add-modules=javafx.controls CountriesCapitalsGUI3.jar
+*** OK ***
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/classes]
+$> mkdir ../jars
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/classes]
+$> jar -cvfm ../jars/CountriesCapitalsGUI3.jar manifest.txt lib/ *.class *.json
+added manifest
+adding: lib/(in = 0) (out= 0)(stored 0%)
+adding: lib/json-simple-1.1.jar(in = 16046) (out= 13991)(deflated 12%)
+adding: Countries3.class(in = 3062) (out= 1589)(deflated 48%)
+adding: CountriesCapitalsGUI3$1.class(in = 1767) (out= 823)(deflated 53%)
+adding: CountriesCapitalsGUI3.class(in = 4575) (out= 2267)(deflated 50%)
+adding: Country.class(in = 1020) (out= 477)(deflated 53%)
+adding: country-capitals.json(in = 40247) (out= 6860)(deflated 82%)
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/classes]
+$> cd ../jars/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/jars]
+$> ll
+total 28
+-rwxr-xr-x 1 27294 2020-04-22 14:13 CountriesCapitalsGUI3.jar*
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/jars]
+$> java -jar --module-path $PATH_TO_FX --add-modules=javafx.controls CountriesCapitalsGUI3.jar
+*** ERRORS *** no lib/ !! (*.json is packed in jar) !!
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/jars]
+$> cp -r ../classes/lib/ ./
+'../classes/lib/' -> './lib'
+'../classes/lib/json-simple-1.1.jar' -> './lib/json-simple-1.1.jar'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/jars]
+$> java -jar --module-path $PATH_TO_FX --add-modules=javafx.controls CountriesCapitalsGUI3.jar
+*** OK ***
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn071_CountryCapitalsGui_jsnon_20200422/V2/jars]
+$> jarxrun CountriesCapitalsGUI3.jar
+*** OK ***

@@ -1,0 +1,85 @@
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200901/combinatorics]
+$> mkdir jars libs src out
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200901/combinatorics]
+$> cp $DOWNLOADS/combinatoricslib3-3.1.1.jar libs/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200901/combinatorics]
+$> tree
+.
+|-- jars
+|-- libs
+|   `-- combinatoricslib3-3.1.1.jar
+|-- manifest.txt
+|-- out
+`-- src
+    `-- Combinatorics.java
+    
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200901/combinatorics]
+$> cat manifest.txt
+Main-Class: Combinatorics
+Class-Path: libs/combinatoricslib3-3.1.1.jar
+
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200901/combinatorics]
+$> javac -d out -cp libs/combinatoricslib3-3.1.1.jar\;src/ src/Combinatorics.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200901/combinatorics]
+$> tree
+.
+|-- jars
+|-- libs
+|   `-- combinatoricslib3-3.1.1.jar
+|-- manifest.txt
+|-- out
+|   `-- Combinatorics.class
+`-- src
+    `-- Combinatorics.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200901/combinatorics]
+$> java -cp libs/combinatoricslib3-3.1.1.jar\;out/ Combinatorics
+[red, black, white]
+[red, black, green]
+[red, black, blue]
+[red, white, green]
+[red, white, blue]
+[red, green, blue]
+[black, white, green]
+[black, white, blue]
+[black, green, blue]
+[white, green, blue]
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200901/combinatorics]
+$> jar --create --file jars/RunCombinatorics.jar --manifest manifest.txt -C out/ Combinatorics.class
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200901/combinatorics]
+$> cp -r libs jars/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200901/combinatorics]
+$> tree
+.
+|-- jars
+|   |-- libs
+|   |   `-- combinatoricslib3-3.1.1.jar
+|   `-- RunCombinatorics.jar
+|-- libs
+|   `-- combinatoricslib3-3.1.1.jar
+|-- manifest.txt
+|-- out
+|   `-- Combinatorics.class
+`-- src
+    `-- Combinatorics.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/BRISI/TTEESSTT/20200901/combinatorics]
+$> java -jar jars/RunCombinatorics.jar
+[red, black, white]
+[red, black, green]
+[red, black, blue]
+[red, white, green]
+[red, white, blue]
+[red, green, blue]
+[black, white, green]
+[black, white, blue]
+[black, green, blue]
+[white, green, blue]
+

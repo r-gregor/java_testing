@@ -1,0 +1,83 @@
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn072_get-resource-files_20200423/projec_root_dir]
+$> tree
+.
+|-- classes
+|-- jars
+|-- compile-and-run_20200423.txt
+`-- src
+    |-- com
+    |   `-- rgregor
+    |       `-- example
+    |           `-- App.java
+    `-- external
+        `-- info.txt
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn072_get-resource-files_20200423/projec_root_dir/src]
+$> javac -d ../classes/ com/rgregor/example/App.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn072_get-resource-files_20200423/projec_root_dir/src]
+$> tree ../
+../
+|-- classes
+|   `-- com
+|       `-- rgregor
+|           `-- example
+|               `-- App.class
+
+|-- compile-and-run_20200423.txt
+|-- jars
+
+`-- src
+    |-- com
+    |   `-- rgregor
+    |       `-- example
+    |           |-- App.class
+    |           `-- App.java
+    `-- external
+        `-- info.txt
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn072_get-resource-files_20200423/projec_root_dir/src]
+$> cd ../classes/
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn072_get-resource-files_20200423/projec_root_dir/classes]
+$> cp -r ../src/external/ ./
+'../src/external/' -> './external'
+'../src/external/info.txt' -> './external/info.txt'
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn072_get-resource-files_20200423/projec_root_dir/classes]
+$> tree ../
+../
+|-- classes
+|   |-- com
+|   |   `-- rgregor
+|   |       `-- example
+|   |           `-- App.class
+|   `-- external
+|       `-- info.txt
+|-- compile-and-run_20200423.txt
+|-- jars
+`-- src
+    |-- com
+    |   `-- rgregor
+    |       `-- example
+    |           |-- App.class
+    |           `-- App.java
+    `-- external
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn072_get-resource-files_20200423/projec_root_dir/classes]
+$> jar --create --file ../jars/App.jar --main-class com.rgregor.example.App com/rgregor/example/App.class external/info.txt
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn072_get-resource-files_20200423/projec_root_dir/classes]
+$> java -jar ../jars/App.jar
+Trying to get external resource ...
+info.txt -- loaded successfuly.
+This is info.txt!
+line 1
+line 2
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn072_get-resource-files_20200423/projec_root_dir/classes]
+$> jar -tvf ../jars/App.jar
+     0 Thu Apr 23 15:00:26 CEST 2020 META-INF/
+    99 Thu Apr 23 15:00:26 CEST 2020 META-INF/MANIFEST.MF
+  1045 Thu Apr 23 14:54:48 CEST 2020 com/rgregor/example/App.class
+    32 Thu Apr 23 14:58:14 CEST 2020 external/info.txt

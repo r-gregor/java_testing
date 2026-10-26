@@ -1,0 +1,1 @@
+jar --create --file ../jars/Padec6.jar  --main-class RunPadec6 Padec6.class RunPadec6.class

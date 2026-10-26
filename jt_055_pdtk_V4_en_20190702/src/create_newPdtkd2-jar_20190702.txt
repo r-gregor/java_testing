@@ -1,0 +1,1 @@
+jar -cvfe newPdtk2.jar newPdtk2 *.class

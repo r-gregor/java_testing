@@ -1,0 +1,4 @@
+for N in 1 2 3; do javac -d ../bin Solution_v${N}}.java; done
+
+for N in 1 2 3; do time java -cp ../bin Solution_v${N}; done
+

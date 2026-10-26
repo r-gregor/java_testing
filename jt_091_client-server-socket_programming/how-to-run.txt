@@ -1,0 +1,7 @@
+from:
+filename: jv_socket-programming-server-client_20201016.txt
+https://www.journaldev.com/741/java-socket-programming-server-client
+
+first run the server: SocketServerExample in first console window
+ then run the client: SocketClientExample in another console window
+

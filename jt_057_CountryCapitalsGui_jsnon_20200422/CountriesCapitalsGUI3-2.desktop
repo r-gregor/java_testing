@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CountriesCapitalsGUI3-2
+Comment=CountriesCapitalsGUI3-2
+Exec=/home/rgregor/java/jars/gui/CountriesCapitalsGUI/CountriesCapitalsGUI3-1.sh
+Icon=java
+Path=/home/rgregor/java/jars/gui/CountriesCapitalsGUI
+Terminal=false
+StartupNotify=true
+Name[en_US]=Countries Capitals GUI3-2

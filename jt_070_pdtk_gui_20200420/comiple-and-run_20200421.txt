@@ -1,0 +1,48 @@
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn070_pdtk_gui_20200420/src]
+$> cat ../jxc
+        #! /bin/bash
+        # filename: jxc
+
+        SC_NAME=$1
+
+        # javac -d ../classes --module-path $PATH_TO_FX --add-modules=javafx.controls ${SC_NAME}.java
+        javac -d ../classes --module-path $PATH_TO_FX --add-modules=javafx.controls ${SC_NAME}
+
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn070_pdtk_gui_20200420/src]
+$> ../jxc *.java
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn070_pdtk_gui_20200420/jars]
+$> jar --create --file=GetFmemInfoGUI.jar --main-class=Gui2 -v -C ../classes/ .
+added manifest
+adding: Family.class(in = 3303) (out= 1872)(deflated 43%)
+adding: Gui2$1.class(in = 2251) (out= 1057)(deflated 53%)
+adding: Gui2.class(in = 4544) (out= 2325)(deflated 48%)
+adding: Person.class(in = 1707) (out= 795)(deflated 53%)
+
+$> gregor.redelonghi@cygwin-en [/home/gregor.redelonghi/JAVA_en_testing/jn070_pdtk_gui_20200420]
+$> tree
+.
+|-- classes
+|   |-- Family.class
+|   |-- Gui2$1.class
+|   |-- Gui2.class
+|   `-- Person.class
+|-- comiple-and-run_20200421.txt
+|-- jars
+|   |-- create_jar_20200420.txt
+|   |-- create_jar_20200421.txt
+|   |-- GetFmemInfo.jar
+|   |-- GetFmemInfoGUI.jar
+|   `-- Gui2.jar
+|-- scripts
+|   |-- jxc
+|   |-- jxr
+|   `-- UIControls.sh
+`-- src
+    |-- _ostalo
+    |   |-- GetFmemInfo.java
+    |   `-- Gui.java
+    |-- Family.java
+    |-- Gui2.java
+    `-- Person.java

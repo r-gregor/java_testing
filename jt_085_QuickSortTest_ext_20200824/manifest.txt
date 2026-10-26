@@ -1,0 +1,2 @@
+Main-class: quicksort.Main
+Class-path: junit-4.13.jar
